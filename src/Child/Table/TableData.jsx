@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../table.css";
 import {
   BsPrinter,
@@ -13,18 +13,15 @@ import {
   AiOutlinePrinter,
   AiOutlineSetting,
 } from "react-icons/ai";
+import { TbListDetails } from "react-icons/tb";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlinePencil } from "react-icons/hi";
 import { Menu, Tooltip } from "@mantine/core";
+import Cookies from "js-cookie";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../DataConfig/firestore";
 
-const tbody = (e) => {
-  e.stopPropagation();
-};
-const place = (e) => {
-  e.stopPropagation();
-};
 const TableData = (props) => {
-  const nav = useNavigate();
   const {
     id,
     name,
@@ -36,12 +33,41 @@ const TableData = (props) => {
     address,
     note,
     imageUrl,
+    fav,
   } = props;
+
+  const place = (e) => {
+    e.stopPropagation();
+  };
+  const storage = JSON?.parse(Cookies?.get("Info"));
+  const userDocName = storage?.email;
+  const updateDocRef = doc(db, userDocName, id);
+  const nav = useNavigate();
+  const True = async (e) => {
+    e.stopPropagation();
+    try {
+      await updateDoc(updateDocRef, { fav: true });
+      window.onload;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const False = async (e) => {
+    e.stopPropagation();
+    try {
+      await updateDoc(updateDocRef, { fav: false });
+      window.onload;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   console.log(id);
   const detailLink = (e) => {
     e.stopPropagation();
     return nav(`/details/${id}`, { state: { data: props } });
   };
+
   return (
     <tr
       className=" shadow hover:bg-[#e0b5ad31] user cursor-pointer"
@@ -74,9 +100,13 @@ const TableData = (props) => {
       </td>
       <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
         <div className="flex flex-wrap gap-2">
-          <span className="px-3 py-1 rounded-md text-[10px] text-[#1d336ecc] bg-[#88a4ff9d]">
-            {job}
-          </span>
+          {job ? (
+            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold">
+              {job}
+            </span>
+          ) : (
+            ""
+          )}
         </div>
       </td>
       <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
@@ -94,12 +124,19 @@ const TableData = (props) => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="">
-                <BsStar className=" text-lg cursor-pointer" />
+                {fav ? (
+                  <BsStarFill
+                    onClick={False}
+                    className=" text-lg cursor-pointer"
+                  />
+                ) : (
+                  <BsStar onClick={True} className=" text-lg cursor-pointer" />
+                )}
               </div>
             </Tooltip>
-            <Link to={`/detail/edit`} onClick={(e) => e.stopPropagation()}>
+            <Link to={`/details/${id}`} onClick={(e) => e.stopPropagation()}>
               <Tooltip
-                label="Edit"
+                label="Detail"
                 className="text-sm"
                 color="dark"
                 position="bottom"
@@ -109,7 +146,7 @@ const TableData = (props) => {
                 closeDelay={300}
               >
                 <div className="">
-                  <HiOutlinePencil className="text-lg cursor-pointer" />
+                  <TbListDetails className="text-lg cursor-pointer" />
                 </div>
               </Tooltip>
             </Link>
@@ -119,7 +156,7 @@ const TableData = (props) => {
                 withArrow
                 arrowSize={6}
                 openDelay={50}
-                closeDelay={300}
+                closeDelay={200}
                 transitionProps={{ transition: "scale", duration: 500 }}
               >
                 <Menu.Target>
@@ -128,13 +165,7 @@ const TableData = (props) => {
                   </div>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <Menu.Item icon={<AiOutlinePrinter size={14} />}>
-                    <p onClick={() => window.print()}>Print</p>
-                  </Menu.Item>
-                  <Menu.Item icon={<AiOutlineSetting size={14} />}>
-                    <p>Settings</p>
-                  </Menu.Item>
-                  <Menu.Item icon={<AiOutlineDelete size={14} />}>
+                  <Menu.Item color="red" icon={<AiOutlineDelete size={14} />}>
                     <p>Delete</p>
                   </Menu.Item>
                 </Menu.Dropdown>

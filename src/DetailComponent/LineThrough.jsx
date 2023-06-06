@@ -2,7 +2,8 @@ import { Tooltip } from "@mantine/core";
 import React from "react";
 import { AiOutlineMail, AiOutlineSchedule } from "react-icons/ai";
 import { BsChatLeft } from "react-icons/bs";
-const LineThrough = () => {
+const LineThrough = ({ user }) => {
+  console.log(user);
   return (
     <div className=" border-t-2 relative my-5">
       <div className="pt-6 absolute top-[-2.6rem] left-36">
@@ -21,7 +22,11 @@ const LineThrough = () => {
               closeDelay={100}
             >
               <div className="">
-                <AiOutlineMail className=" text-blue-500 cursor-pointer text-xl" />
+                <AiOutlineMail
+                  className={`${
+                    user?.email ? "text-blue-500" : "text-slate-400"
+                  } cursor-pointer text-xl`}
+                />
               </div>
             </Tooltip>
           </div>
@@ -39,7 +44,11 @@ const LineThrough = () => {
               closeDelay={100}
             >
               <div className="">
-                <AiOutlineSchedule className=" text-blue-500 cursor-pointer text-xl" />
+                <AiOutlineSchedule
+                  className={`${
+                    user?.date ? "text-blue-500" : "text-slate-400"
+                  } cursor-pointer text-xl`}
+                />
               </div>
             </Tooltip>
           </div>
@@ -57,7 +66,11 @@ const LineThrough = () => {
               closeDelay={100}
             >
               <div className="">
-                <BsChatLeft className=" text-blue-500 cursor-pointer text-lg" />
+                <BsChatLeft
+                  className={`${
+                    user?.note ? "text-blue-500" : "text-slate-400"
+                  } cursor-pointer text-lg`}
+                />
               </div>
             </Tooltip>
           </div>

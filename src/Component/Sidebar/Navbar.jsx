@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UseCustomProvider } from "../../Context/DarkMoodContext";
-import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
+import { BsFillSunFill, BsFillMoonStarsFill, BsPerson } from "react-icons/bs";
 // import { RiContactsFill } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GoSearch } from "react-icons/go";
 import "./navbar.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { lightToggle } from "../../app/LightSlice";
+import { getUsers, lightToggle, removeUser } from "../../app/LightSlice";
 import Cookies from "js-cookie";
-import { info } from "autoprefixer";
+import { AiOutlineMail } from "react-icons/ai";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useLogoutMutation } from "../../app/Authapi";
+
+import { Menu } from "@mantine/core";
 
 const Navbar = () => {
   const { darkMode, handleThemeSwitch } = UseCustomProvider();
   const [search, setSearch] = useState("");
-  const nav = useNavigate();
   const onSubmitHandler = (e) => {
     e.preventDefault();
     console.log(search);
@@ -24,9 +27,27 @@ const Navbar = () => {
   const userInfo = JSON.parse(Cookies?.get("Info"));
   const name = userInfo.name;
   const email = userInfo.email;
-  console.log(name, email);
   const side = useSelector((state) => state.light.light);
+
+  const [opened, setOpened] = useState(false);
+  const [logout, { isLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
+  const nav = useNavigate();
+  const token = Cookies.get("User");
+
+  const logoutHandler = async () => {
+    const { data } = await logout(token);
+    console.log(data);
+    try {
+      if (data.success) {
+        nav("/login");
+        dispatch(removeUser());
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className=" p-3  dark:bg-gray-800">
       <div className=" flex justify-between items-center">
@@ -84,14 +105,34 @@ const Navbar = () => {
           </button>
           <div className="">
             <div className=" w-10 h-10 rounded-[5rem] bg-[#E6AA68] border dark:border-none flex justify-center items-center">
-              <div className={`hidden `}>
-                <img src="" alt="" className="rounded-[5rem] w-10 h-10" />
-                {/* img pr ma img pya ml */}
-              </div>
-              <div className={``}>
-                <h2 className=" uppercase text-xl font-medium text-white">
-                  {name.charAt(0)}
-                </h2>
+              <div className={` cursor-pointer`}>
+                <Menu opened={opened} onChange={setOpened}>
+                  <Menu.Target>
+                    <h3 className=" uppercase text-xl font-medium text-white">
+                      {name.charAt(0)}
+                    </h3>
+                  </Menu.Target>
+                  <Menu.Dropdown>
+                    <Menu.Label>
+                      <h3 className="text-black text-md capitalize flex items-center gap-1">
+                        <BsPerson /> {name}
+                      </h3>
+                    </Menu.Label>
+                    <Menu.Label>
+                      <h3 className="text-md text-gray-700 flex items-center gap-1">
+                        <AiOutlineMail /> {email}
+                      </h3>
+                    </Menu.Label>
+                    <Menu.Item>
+                      <button
+                        onClick={logoutHandler}
+                        className="text-sm flex items-center gap-1"
+                      >
+                        <IoLogOutOutline /> Logout
+                      </button>
+                    </Menu.Item>
+                  </Menu.Dropdown>
+                </Menu>
               </div>
             </div>
           </div>

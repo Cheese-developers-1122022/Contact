@@ -49,9 +49,6 @@ const DetailEdit = ({ edit, setEdit,user }) => {
               </div>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item icon={<AiOutlinePrinter size={14} />}>
-                <p onClick={() => window.print()}>Print</p>
-              </Menu.Item>
               <Menu.Item color="red" icon={<AiOutlineDelete size={14} />}>
                 <p>Delete</p>
               </Menu.Item>

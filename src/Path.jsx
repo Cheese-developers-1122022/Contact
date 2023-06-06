@@ -1,19 +1,24 @@
 import React from "react";
 import Contacts from "./Component/Sidebar/Contacts";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import ContactCreate from "./Component/Sidebar/ContactCreate";
-import Register from "./Component/Sidebar/Register";
-import Login from "./Component/Sidebar/Login";
 import Detail from "./Component/Sidebar/Details";
+import Navbar from "./Component/Sidebar/Navbar";
+import Siderbar from "./Component/Sidebar/Siderbar";
 const Path = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Contacts />} />
-      <Route path="/create" element={<ContactCreate />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/details/:id" element={<Detail />} />
-    </Routes>
+    <div className="flex flex-col w-screen">
+      <Navbar />
+      <div className="flex w-screen">
+        <Siderbar />
+        <Routes>
+          <Route path="/" element={<Contacts />}>
+            <Route path="create" element={<ContactCreate />} />
+            <Route path="details/:id" element={<Detail />} />
+          </Route>
+        </Routes>
+      </div>
+    </div>
   );
 };
 

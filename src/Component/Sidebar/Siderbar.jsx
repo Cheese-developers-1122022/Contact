@@ -30,7 +30,9 @@ console.log(count)
               <button className="flex items-center px-4 py-2 rounded hover:bg-slate-200 gap-6 justify-around">
                 <BsPersonFill />
                 <h2 className="">Contacts</h2>
-                <span className="px-2 bg-slate-300 rounded-full">{count.length}</span>
+                <span className="px-2 bg-slate-300 rounded-full">
+                  {count.length}
+                </span>
               </button>
             </NavLink>
           </div>

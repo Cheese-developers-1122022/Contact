@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiCake, BiNote } from "react-icons/bi";
 import { BsFlag, BsTelephone, BsPersonWorkspace } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const DetailCard = ({ user }) => {
   const userPhoneNumber = user.phoneNumber;
   // const date = new Date().toDateString();
@@ -11,12 +12,12 @@ const DetailCard = ({ user }) => {
       <div className="flex flex-col gap-3">
         <p className="flex items-center">
           <AiOutlineMail className="text-gray-600 mr-5 mb-0" />{" "}
-          <a
-            href="https://mail.google.com/mail/u/?authuser=user@gmail.com"
+          <Link
+            to={`https://mail.google.com/mail/u/?authuser=${user.email}`}
             className="text-blue-400"
           >
             {user.email}
-          </a>
+          </Link>
         </p>
         <p className="flex items-center">
           <BsTelephone className="text-gray-600 mr-5 mb-0" />
@@ -27,7 +28,7 @@ const DetailCard = ({ user }) => {
         <p className="flex items-center">
           <BsFlag className="text-gray-600 mr-5 mb-0" />
           <a
-            href="https://www.google.com/maps/place/Landon"
+            href={`https://www.google.com/maps/place/${user.address}`}
             onClick={(e) => e.stopPropagation()}
             className="text-gray-700"
           >

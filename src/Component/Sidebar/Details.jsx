@@ -1,4 +1,4 @@
-import { Modal } from "@mantine/core";
+import { Modal, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import React, { useEffect, useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
@@ -14,8 +14,10 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../DataConfig/firestore";
 import Cookies from "js-cookie";
 import DetailEdit from "../../DetailComponent/DetailControl";
+import { User } from "tabler-icons-react";
 const Detail = () => {
   const [user, setUser] = useState([]);
+  const [newImage, setNewImage] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [edit, setEdit] = useState(false);
   useEffect(() => {
@@ -26,6 +28,9 @@ const Detail = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
+  console.log(user.date);
+  // const dateObj = new Date(user.date.seconds * 1000);
+  // console.log(dateObj);
   const UserId = useParams();
   const storage = JSON.parse(Cookies?.get("Info"));
   const userDocName = storage.email;
@@ -42,7 +47,8 @@ const Detail = () => {
   };
   useEffect(() => {
     UserData();
-  }, []);
+  }, [edit]);
+  console.log(user?.imageUrl);
   const submit = () => {
     confirmAlert({
       title: "You have unsaved changes",
@@ -59,8 +65,9 @@ const Detail = () => {
       ],
     });
   };
+  console.log(user?.imageUrl);
   return (
-    <div className="w-[80%] min-h-full px-10">
+    <div className="w-[80%] min-h-full lg:px-8 md:px-4">
       <div className="flex items-end justify-between pb-6 relative">
         <div className="py-5 px-3 flex flex-row gap-10">
           {!edit ? (
@@ -93,11 +100,19 @@ const Detail = () => {
                 onClick={open}
               >
                 {/* image condition sis ya ml */}
-                <img
-                  src={user.imageUrl}
-                  alt=""
-                  className=" sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover"
-                />
+                {user?.imageUrl === "" ? (
+                  <div className="flex items-center justify-center sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
+                    <h2 className=" uppercase text-xl font-medium text-black">
+                      {user?.name?.charAt(0)}
+                    </h2>
+                  </div>
+                ) : (
+                  <img
+                    src={user.imageUrl}
+                    alt=""
+                    className=" sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover"
+                  />
+                )}
               </div>
             </div>
             <Modal
@@ -115,13 +130,21 @@ const Detail = () => {
               <div className="p-5">
                 <div className="flex flex-col justify-center items-center mx-auto rounded-full h-[170px] w-[170px] overflow-hidden">
                   <img
-                    src="https://i2-prod.mirror.co.uk/incoming/article28700340.ece/ALTERNATES/s1200d/0_TOPSHOT-FBL-WC-2022-MATCH58-CRO-BRA.jpg"
+                    src={user?.imageUrl}
                     alt=""
                     className="h-[170px] w-[170px] object-cover"
                   />
                 </div>
                 <div className="text-center mt-5">
-                  <h3 className="text-lg font-semibold">Photo Contact</h3>
+                  <h3 className="text-lg font-semibold">{user.name}</h3>
+                  <p>{user.email}</p>
+                  <div className="flex justify-center mt-5">
+                    <TextInput
+                      value={newImage}
+                      onChange={(e) => setNewImage(e.target.value)}
+                      placeholder="Upload New Image"
+                    />
+                  </div>
                 </div>
               </div>
             </Modal>
@@ -139,7 +162,7 @@ const Detail = () => {
             </div>
           </div>
         </div>
-        <DetailEdit user={user} edit={edit} setEdit={setEdit} />
+        <DetailEdit edit={edit} setEdit={setEdit} />
       </div>
       {!edit ? (
         <div className="mt-5">
