@@ -104,11 +104,11 @@ const Navbar = () => {
             </p>
           </button>
           <div className="">
-            <div className=" w-10 h-10 rounded-[5rem] bg-[#E6AA68] border dark:border-none flex justify-center items-center">
+            <div className=" w-10 h-10 rounded-[5rem] bg-[#C4CAD0] border dark:border-none flex justify-center items-center">
               <div className={` cursor-pointer`}>
                 <Menu opened={opened} onChange={setOpened}>
                   <Menu.Target>
-                    <h3 className=" uppercase text-xl font-medium text-white">
+                    <h3 className=" uppercase text-2xl font-medium text-black">
                       {name.charAt(0)}
                     </h3>
                   </Menu.Target>

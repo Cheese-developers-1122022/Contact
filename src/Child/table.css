@@ -37,10 +37,20 @@
   scroll-behavior: smooth;
   display: none;
 }
-.send-icons{
-    transform: translateX(0);
-    transition: 0.5s ease-in-out;
+.send-icons {
+  transform: translateX(0);
+  transition: 0.5s ease-in-out;
 }
-.btn-send:hover .send-icons{
-    transform: translateX(2px) translateY(-2px) rotate(-20deg);
+.btn-send:hover .send-icons {
+  transform: translateX(2px) translateY(-2px) rotate(-20deg);
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EDF9FF;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #C1EAFD, #FFB2B8, #bef5f0de);
 }

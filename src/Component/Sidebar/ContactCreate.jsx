@@ -16,7 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 //   IconPhone,
 //   IconBuildingSkyscraper,
 //   IconMapPinFilled,
-// } from "tabler-icons-react";
+// } from "@";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 // import "react-phone-number-input/style.css";
 // import "./CreateContact.css";
@@ -66,7 +66,7 @@ const ContactCreate = () => {
         phoneNumber,
         address,
         note,
-        imageUrl: JSON.stringify(imageUrl),
+        // imageUrl: JSON.stringify(imageUrl),
       });
       
       toast.success("Successfully!");

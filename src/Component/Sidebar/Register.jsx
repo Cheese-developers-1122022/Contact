@@ -34,8 +34,8 @@ const Register = () => {
   // const localStorage =
 
   return (
-    <div className="  h-screen flex justify-center  items-center">
-      <div className="border-2 shadow-xl w-[1000px] p-10 rounded-md flex justify-around  items-center">
+    <div className=" bg-[#EFF9F0]  h-screen flex justify-center  items-center">
+      <div className="border-[1px] shadow-xl w-[1000px] p-10 rounded-md flex justify-around  items-center">
         <form
           onSubmit={form.onSubmit(async (values) => {
             try {

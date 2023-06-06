@@ -4,7 +4,10 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Roboto"],
+      sans: ["Open Sans"],
+      serif: ["Playfair"],
+      body: ["Roboto Slab"],
+      mono: ["Montserrat"],
     },
     extend: {},
   },

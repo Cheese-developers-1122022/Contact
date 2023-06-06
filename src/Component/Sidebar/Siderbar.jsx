@@ -8,15 +8,15 @@ const Siderbar = () => {
 const count=useSelector((state)=>state.light.users)
 console.log(count)
   return (
-    <div className="">
+    <div className="bg-[#D8D8D8]">
       <div
         className={
           side
-            ? "translate-x-0 ease-linear duration-[0.3s] w-[250px] "
-            : "translate-x-[-300px] ease-linear  duration-[0.3s]  w-0"
+            ? "translate-x-0 ease-in duration-[0.15s] w-[250px] z-[1000] md:z-[1] lg:relative absolute"
+            : "translate-x-[-300px] ease-in  duration-[0.15s]  w-0  z-[1000] md:z-[1] lg:relative absolute"
         }
       >
-        <div className="min-h-screen  items-center flex gap-y-4 flex-col bg-[#f1f1f1]">
+        <div className="  h-full md:min-h-screen items-center flex gap-y-4 flex-col bg-[#D8D8D8]">
           <div className="py-2">
             <NavLink to="/create">
               <button className="px-2 hover:shadow-lg font-sans shadow-[#484545] duration-[1s] py-1 bg-slate-300 items-center gap-1 text-lg font-medium rounded-lg flex ">

@@ -84,7 +84,7 @@ const TableData = (props) => {
       </td>
       <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
         <div className="">
-          <h3>{name}</h3>
+          <h3 className=" font-mono">{name}</h3>
           <p className="text-gray-500 cursor-pointer text-sm">09298414102</p>
         </div>
       </td>

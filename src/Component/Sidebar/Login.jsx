@@ -20,7 +20,7 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
   return (
-    <div className=" flex justify-center h-screen items-center ">
+    <div className=" bg-[#EFF9F0]  flex justify-center h-screen items-center ">
       <form
         onSubmit={form.onSubmit(async (values) => {
           try {

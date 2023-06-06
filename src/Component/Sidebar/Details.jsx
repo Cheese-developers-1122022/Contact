@@ -100,9 +100,9 @@ const Detail = () => {
                 onClick={open}
               >
                 {/* image condition sis ya ml */}
-                {user?.imageUrl === "" ? (
-                  <div className="flex items-center justify-center sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
-                    <h2 className=" uppercase text-xl font-medium text-black">
+                {user?.imageUrl == null? (
+                  <div className="flex items-center justify-center bg-[#D8D8D8] sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
+                    <h2 className=" uppercase text-4xl font-medium  text-black">
                       {user?.name?.charAt(0)}
                     </h2>
                   </div>
