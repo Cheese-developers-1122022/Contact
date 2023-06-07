@@ -40,7 +40,7 @@ const DetailEdit = ({ edit, setEdit, user }) => {
   console.log(user);
   return (
     <>
-      <div className="flex gap-5 items-center">
+      <div className="flex mt-[15px] justify-end gap-5 items-center mr-5 sm:mr-5 md:mr-0 lg:mr-0">
         <Tooltip
           label="Favorite"
           className={`text-sm`}

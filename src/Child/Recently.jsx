@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Modal, useMantineTheme } from "@mantine/core";
 import Form from "../DetailComponent/EmailForm";
 import { useSelector } from "react-redux";
 const Recently = () => {
@@ -12,7 +12,7 @@ const Recently = () => {
   const [favoriteItem, setFavoriteItem] = useState([]);
   const [filterFavorite, setFilterFavorite] = useState([]);
   const favorite = useSelector((state) => state.light.users);
-
+  const theme = useMantineTheme();
 
   useEffect(() => {
     setFavoriteItem(favorite);
@@ -21,7 +21,7 @@ const Recently = () => {
   useEffect(() => {
     const filter = favoriteItem.filter((item) => item.fav === true);
     setFilterFavorite(filter);
-  }, [favoriteItem]);
+  }, [favoriteItem, favorite]);
 
   const place = (e) => {
     e.stopPropagation();
@@ -32,14 +32,15 @@ const Recently = () => {
   const userEmailAndCall = (e) => {
     e.stopPropagation();
   };
+  console.log(filterFavorite);
   return (
     <div className="flex items-center relative">
-      <div className=" w-[90vw] sm:w-[70vw] md:w-[90vw] lg:w-[70vw] xl:w-[85vw] overflow-x-scroll scroll-custom flex items-center gap-5 scroll-smooth py-4">
+      <div className=" min-w-full w-[90vw] justify-start sm:w-[90vw] md:w-[90vw] lg:w-[70vw] xl:w-[85vw] overflow-x-scroll scroll-custom flex items-center gap-5 scroll-smooth py-4">
         {filterFavorite?.map((item) => {
           return (
             <div
               key={item?.id}
-              className="flex min-w-[380px] flex-col p-5 rounded-lg shadow-lg shadow-blue-100 gap-3 justify-center user-card"
+              className="flex min-w-[350px] sm:min-w-[360px] md:min-w-[370px] lg:min-w-[380px] xl:min-w-[380px] flex-col p-5 rounded-lg shadow-lg shadow-blue-100 gap-3 justify-center user-card"
               onClick={userEmailAndCall}
             >
               <Link to={`/details/${item?.id}`}>
@@ -85,7 +86,7 @@ const Recently = () => {
                   {item?.address}
                 </a>
                 <p className=" text-gray-600 font-[500] text-sm">
-                  Kyaw@gmail.com
+                  {item?.email}
                 </p>
               </div>
               <div className="flex items-center gap-5">
@@ -100,12 +101,26 @@ const Recently = () => {
                 </button>
                 <Modal
                   title="Send Email"
+                  size="auto"
                   onClose={close}
                   opened={opened}
+                  transitionProps={{
+                    transition: "pop",
+                    duration: 300,
+                    timingFunction: "linear",
+                  }}
+                  overlayProps={{
+                    color:
+                      theme.colorScheme === "dark"
+                        ? theme.colors.dark[8]
+                        : theme.colors.gray[7],
+                    opacity: 0.55,
+                    blur: 3,
+                  }}
                   centered
                 >
                   {/* form mhr close method passing payy ml */}
-                  <Form close={close} />
+                  <Form close={close} data={item} />
                 </Modal>
                 <a
                   // tel need

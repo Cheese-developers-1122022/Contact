@@ -44,9 +44,10 @@
 .btn-send:hover .send-icons {
   transform: translateX(2px) translateY(-2px) rotate(-20deg);
 }
+
 ::-webkit-scrollbar {
-  width: 0px;
-  height: 8px;
+  width: 1px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #EDF9FF;

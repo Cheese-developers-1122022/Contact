@@ -74,107 +74,108 @@ const Detail = () => {
   };
   console.log(user?.imageUrl);
   return (
-    <div className="w-[80%] min-h-full lg:px-8 md:px-4">
-      <div className="flex items-end justify-between pb-6 relative">
-        <div className="py-5 px-3 flex flex-row gap-10">
-          {!edit ? (
-            <Link to={"/"} className=" cursor-pointer">
+    <div className=" w-[100vw] sm:w-[90vw] md:w-[80vw] mx-auto lg:w-[80%] xl:w-[80%] min-h-full px-0 sm:px-3 lg:px-8 md:px-4">
+      <div className="m-5">
+        {!edit ? (
+          <Link to={"/"} className=" cursor-pointer">
+            <h3>
+              <BsArrowLeft className="text-xl font-semibold" />
+            </h3>
+          </Link>
+        ) : (
+          <>
+            <Link
+              onClick={(e) => {
+                e.stopPropagation();
+                if (edit) {
+                  submit();
+                }
+              }}
+              className=" cursor-pointer"
+            >
               <h3>
-                <BsArrowLeft className="text-xl font-semibold" />
+                <RxCross2 className="text-xl font-semibold" />
               </h3>
             </Link>
-          ) : (
-            <>
-              <Link
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (edit) {
-                    submit();
-                  }
-                }}
-                className=" cursor-pointer"
-              >
-                <h3>
-                  <RxCross2 className="text-xl font-semibold" />
-                </h3>
-              </Link>
-            </>
-          )}
-          <div className="flex gap-5 items-center">
-            <div className="">
-              <div
-                className=" sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] overflow-hidden rounded-full cursor-pointer"
-                onClick={open}
-              >
-                {/* image condition sis ya ml */}
-                {user?.imageUrl ? (
-                  <img
-                    src={user.imageUrl}
-                    alt=""
-                    className=" sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center bg-[#D8D8D8] sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
-                    <h2 className=" uppercase text-4xl font-medium  text-black">
-                      {user?.name?.charAt(0)}
-                    </h2>
-                  </div>
-                )}
-              </div>
-            </div>
-            <Modal
-              onClose={close}
-              opened={opened}
-              centered
-              title={<h3 className="text-lg font-semibold">Photo</h3>}
-              transitionProps={{
-                transition: "fade",
-                duration: 400,
-                timingFunction: "linear",
-              }}
-              radius={"0.7rem"}
+          </>
+        )}
+      </div>
+
+      <div className="flex justify-center items-center sm:justify-center sm:items-center md:justify-center md:items-center xl:justify-start lg:items-center xl:items-center lg:justify-start xl:ml-40 lg:ml-28 flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row gap-5 ">
+        <div className="p-5 sm:p-5 md:p-5 lg:p-0 xl:p-0">
+          {user?.imageUrl? (
+            <div
+              className=" w-[150px] sm:w-[160px] md:w-[150px] lg:w-[200px] h-[150px] sm:h-[160px] md:h-[150px] lg:h-[200px]  overflow-hidden rounded-full cursor-pointer"
+              onClick={open}
             >
-              <div className="p-5">
-                <div className="flex flex-col justify-center items-center mx-auto rounded-full h-[170px] w-[170px] overflow-hidden">
-                  <img
-                    src={user?.imageUrl}
-                    alt=""
-                    className="h-[170px] w-[170px] object-cover"
-                  />
-                </div>
-                <div className="text-center mt-5">
-                  <h3 className="text-lg font-semibold">{user?.name}</h3>
-                  <p>{user?.email}</p>
-                  <div className="flex justify-center mt-5">
-                    <TextInput
-                      value={newImage}
-                      onChange={(e) => setNewImage(e.target.value)}
-                      placeholder="Upload New Image"
-                    />
-                  </div>
-                </div>
+              <img
+                src={user?.imageUrl}
+                alt=""
+                className=" w-[150px] sm:w-[160px] md:w-[150px] lg:w-[200px] h-[150px] sm:h-[160px] md:h-[150px] lg:h-[200px] object-cover"
+              />
+            </div>
+          ) : (
+            <div
+              className=" w-[150px] sm:w-[160px] md:w-[150px] lg:w-[200px] bg-gray-200 border-4 border-gray-400 hover:border-blue-500 overflow-hidden rounded-full cursor-pointer"
+              onClick={open}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt=""
+                className=" w-[150px] sm:w-[160px] md:w-[150px] lg:w-[200px] object-cover"
+              />
+            </div>
+          )}
+        </div>
+        <Modal
+          onClose={close}
+          opened={opened}
+          centered
+          title={<h3 className="text-lg font-semibold">Photo</h3>}
+          transitionProps={{
+            transition: "fade",
+            duration: 400,
+            timingFunction: "linear",
+          }}
+          radius={"0.7rem"}
+        >
+          <div className="p-5">
+            <div className="flex flex-col justify-center items-center mx-auto rounded-full h-[200px] w-[200px] overflow-hidden">
+              <img
+                src={user?.imageUrl}
+                alt=""
+                className="h-[200px] w-[200px] object-cover"
+              />
+            </div>
+            <div className="text-center mt-5">
+              <h3 className="text-lg font-semibold">{user?.name}</h3>
+              <p>{user?.email}</p>
+              <div className="flex justify-center mt-5">
+                <TextInput
+                  value={newImage}
+                  onChange={(e) => setNewImage(e.target.value)}
+                  placeholder="Upload New Image"
+                />
               </div>
-            </Modal>
-            <div className="flex flex-col">
-              <h3 className="text-lg font-semibold ">{user?.name}</h3>
-              {/* <a
-                href="tel:09-9729374073"
-                className="text-gray-500 font-medium text-sm"
-              >
-                09-9729374073
-              </a> */}
-              <p className="text-gray-700 font-medium text-sm mt-1">
-                {user?.job}
-              </p>
             </div>
           </div>
+        </Modal>
+        <div className="flex flex-col">
+          <h3 className=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold ">
+            {user?.name}
+          </h3>
+          <p className="text-gray-700 font-medium text-sm sm:text-sm md:text-base lg:text-base mt-1">
+            {user?.job}
+          </p>
         </div>
-        <DetailEdit user={user} edit={edit} setEdit={setEdit} />
       </div>
+
+      <DetailEdit edit={edit} setEdit={setEdit} user={user} />
+
       {!edit ? (
         <div className="mt-5">
           <LineThrough user={user} />
-          <div className="flex justify-between gap-10 w-[80%] mt-16">
+          <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row justify-between gap-10 w-[80%] mt-16">
             <DetailCard user={user} />
             <div className="">
               <h3 className="text-lg text-gray-800 flex items-center gap-1">

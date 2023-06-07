@@ -6,7 +6,7 @@ const LineThrough = ({ user }) => {
   console.log(user);
   return (
     <div className=" border-t-2 relative my-5">
-      <div className="pt-6 absolute top-[-2.6rem] left-36">
+      <div className="pt-6 absolute top-[-2.6rem] left-16 sm:left-24 md:left-36 lg:left-36">
         <div className="flex gap-4 items-center">
           <div
             className={`p-2 bg-slate-100 shadow-md shadow-cyan-200 rounded-full`}
@@ -25,7 +25,7 @@ const LineThrough = ({ user }) => {
                 <AiOutlineMail
                   className={`${
                     user?.email ? "text-blue-500" : "text-slate-400"
-                  } cursor-pointer text-xl`}
+                  }  text-xl`}
                 />
               </div>
             </Tooltip>
@@ -47,7 +47,7 @@ const LineThrough = ({ user }) => {
                 <AiOutlineSchedule
                   className={`${
                     user?.date ? "text-blue-500" : "text-slate-400"
-                  } cursor-pointer text-xl`}
+                  }  text-xl`}
                 />
               </div>
             </Tooltip>
@@ -69,7 +69,7 @@ const LineThrough = ({ user }) => {
                 <BsChatLeft
                   className={`${
                     user?.note ? "text-blue-500" : "text-slate-400"
-                  } cursor-pointer text-lg`}
+                  }  text-lg`}
                 />
               </div>
             </Tooltip>

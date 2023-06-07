@@ -4,9 +4,9 @@ import Siderbar from "../Component/Sidebar/Siderbar";
 import Contracts from "../Component/Sidebar/Contacts";
 const ContactsPage = () => {
   return (
-    <div className="flex flex-col w-screen">
+    <div className="flex flex-col">
       <Navbar />
-      <div className="flex w-screen">
+      <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start">
         <Siderbar />
         <Contracts />
       </div>

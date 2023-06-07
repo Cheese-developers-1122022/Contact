@@ -79,36 +79,42 @@ const TableData = (props) => {
       onClick={detailLink}
     >
       <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
-        <div className="w-10 h-10 rounded-full overflow-hidden">
-          <img
-            src={imageUrl}
-            className=" w-10 h-10 object-cover object-center"
-            alt=""
-          />
-        </div>
+        {imageUrl ? (
+          <div className="w-10 h-10 border-2 border-[#D8D8D8] hover:border-blue-500 rounded-full overflow-hidden">
+            <img
+              src={imageUrl}
+              className=" w-10 h-10 object-cover object-center"
+              alt=""
+            />
+          </div>
+        ) : (
+          <div className="flex items-center justify-center bg-gray-300 rounded-full w-10 h-10 border-2 border-[#acacac] hover:border-blue-500">
+            <h2 className=" uppercase text-2xl font-semibold  text-black">
+              {name?.charAt(0)}
+            </h2>
+          </div>
+        )}
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 font-semibold flex justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start 2xl:justify-start items-center tracking-wide text-gray-900">
         <div className="">
-          <h3 className=" font-body dark:text-white/80">{name}</h3>
-          <p className="text-gray-500 cursor-pointer font-mono text-sm dark:text-white/90">
-            09298414102
-          </p>
+          <h3 className=" font-mono">{name}</h3>
+          <p className="text-gray-500 cursor-pointer text-sm">{phoneNumber}</p>
         </div>
       </td>
-      <td className="px-3 py-4 font-semibold font-serif text-left tracking-wide text-gray-900 dark:text-white/90">
+      <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900">
         <a href="" className="hover:border-b-[2px] border-gray-400">
           {email}
         </a>
       </td>
-      <td className="px-3 py-4 font-semibold font-mono text-left tracking-wide text-gray-900 dark:text-white/90">
+      <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900">
         <a href="https://www.google.com/maps/place/Landon" onClick={place}>
           {address}
         </a>
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900 dark:text-white/90">
+      <td className="px-3 py-4 hidden sm:hidden md:hidden lg:hidden xl:table-cell 2xl:table-cell font-semibold tracking-wide text-gray-900">
         <div className="flex flex-wrap gap-2">
           {job ? (
-            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold font-mono">
+            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold">
               {job}
             </span>
           ) : (
@@ -116,7 +122,7 @@ const TableData = (props) => {
           )}
         </div>
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 font-semibold text-left hidden sm:table-cell md:table-cell lg:table-cell xl:table-cell 2xl:table-cell tracking-wide text-gray-900">
         <div className="action">
           <div className="flex items-center gap-5">
             <Tooltip
@@ -164,16 +170,22 @@ const TableData = (props) => {
                 arrowSize={6}
                 openDelay={50}
                 closeDelay={200}
+                position="right"
+                offset={-1}
                 transitionProps={{ transition: "scale", duration: 500 }}
               >
                 <Menu.Target>
-                  <div className="">
+                  <div className="" onClick={(e) => e.stopPropagation()}>
                     <BsThreeDotsVertical className=" text-lg cursor-pointer" />
                   </div>
                 </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Item color="red" icon={<AiOutlineDelete size={14} />}>
-                    <p>Delete</p>
+                <Menu.Dropdown size="xs">
+                  <Menu.Item
+                    size="xs"
+                    color="red"
+                    icon={<AiOutlineDelete size={14} />}
+                  >
+                    <p className="text-[0.7rem] p-0">Delete</p>
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>

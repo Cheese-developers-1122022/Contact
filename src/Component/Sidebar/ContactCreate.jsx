@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import { GrClose, GrMail } from "react-icons/gr";
-import toast, { Toaster } from "react-hot-toast";
 import { BiImageAdd, BiPencil, BiMap } from "react-icons/bi";
 import {
   BsTrash,
@@ -74,7 +73,7 @@ const ContactCreate = () => {
         imageUrl,
         fav: false,
       });
-      toast.success("Successfully!");
+
       navigate("/");
     } catch (e) {
       console.error(e);
@@ -85,7 +84,6 @@ const ContactCreate = () => {
   console.log(imageUrl);
   return (
     <div className="relative w-screen flex  flex-col p-5 md:items-center ">
-      <Toaster position="top-right" />
       <div className="  flex justify-between items-end  md:self-start p-3">
         <div className=" md:hidden">
           <Link to={"/"}>
@@ -215,6 +213,7 @@ const ContactCreate = () => {
                 icon={<BsFillPersonFill />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px] "
                 value={name}
+                required
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter name"
               />
@@ -226,6 +225,7 @@ const ContactCreate = () => {
                 icon={<BsFillTelephoneFill />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px]"
                 placeholder="Phone number"
+                required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />

@@ -43,7 +43,7 @@ const Edit = ({ edit, setEdit, user }) => {
     setTelephone(user?.phoneNumber);
     setNote(user?.note);
     setCountry(user?.address);
-  }, [user]);
+  }, []);
   const formSubmit = async (e) => {
     e.preventDefault();
     alert("Are you sure?");
@@ -55,14 +55,14 @@ const Edit = ({ edit, setEdit, user }) => {
         phoneNumber: telephone,
         job,
         note,
-       date: moment(birthday).format("LL"),
+        date: moment(birthday).format("LL"),
       });
       setEdit(!edit);
     } catch (e) {
       console.error(e);
     }
   };
-  console.log(user.date)
+  console.log(user.date);
   return (
     <div className="">
       <form className="flex flex-col gap-4 w-[70%] border rounded-md p-3">

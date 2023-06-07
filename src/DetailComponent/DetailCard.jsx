@@ -7,7 +7,7 @@ const DetailCard = ({ user }) => {
   const userPhoneNumber = user?.phoneNumber;
   // const date = new Date().toDateString();
   return (
-    <div className="flex flex-col gap-5 min-w-[450px] p-3 border rounded-md shadow-md shadow-gray-100">
+    <div className="flex flex-col gap-5 min-w-[380px] sm:min-w-[400px] md:min-w-[430px] lg:min-w-[450px] xl:min-w-[450px] p-3 border rounded-md shadow-md shadow-gray-100">
       <h3 className="text-gray-800 font-semibold">Contact details</h3>
       <div className="flex flex-col gap-3">
         <p className="flex items-center">
