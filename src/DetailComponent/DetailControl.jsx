@@ -1,12 +1,43 @@
 import { Loader, Menu, Tooltip } from "@mantine/core";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { AiOutlineDelete, AiOutlinePrinter } from "react-icons/ai";
 import { BsStar, BsStarFill, BsThreeDotsVertical } from "react-icons/bs";
-const DetailEdit = ({ edit, setEdit,user }) => {
-  const [isFav, setIsFav] = useState(false);
-  const favorite = () => {
-    setIsFav(!isFav);
+import { db } from "../DataConfig/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+const DetailEdit = ({ edit, setEdit, user }) => {
+  const UserId = useParams();
+  const storage = JSON?.parse(Cookies?.get("Info"));
+  const userDocName = storage?.email;
+  const updateDocRef = doc(db, userDocName, UserId.id);
+  const navigate = useNavigate();
+  const True = async (e) => {
+    console.log(user);
+    try {
+      await updateDoc(updateDocRef, { fav: true });
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  const False = async (e) => {
+    try {
+      await updateDoc(updateDocRef, { fav: false });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const del = async (e) => {
+    e.stopPropagation();
+    try {
+      await deleteDoc(updateDocRef);
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  console.log(user);
   return (
     <>
       <div className="flex gap-5 items-center">
@@ -20,19 +51,11 @@ const DetailEdit = ({ edit, setEdit,user }) => {
           transitionProps={{ transition: "pop", duration: 300 }}
           closeDelay={100}
         >
-          <div className="" onClick={favorite}>
-            {!isFav ? (
-              <BsStar
-                className={` text-lg cursor-pointer ${
-                  !edit ? "block" : "hidden"
-                }`}
-              />
+          <div className="">
+            {user?.fav ? (
+              <BsStarFill onClick={False} className=" text-lg cursor-pointer" />
             ) : (
-              <BsStarFill
-                className={` text-yellow-400 text-lg cursor-pointer ${
-                  !edit ? "block" : "hidden"
-                }`}
-              />
+              <BsStar onClick={True} className=" text-lg cursor-pointer" />
             )}
           </div>
         </Tooltip>
@@ -49,7 +72,11 @@ const DetailEdit = ({ edit, setEdit,user }) => {
               </div>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item color="red" icon={<AiOutlineDelete size={14} />}>
+              <Menu.Item
+                onClick={del}
+                color="red"
+                icon={<AiOutlineDelete size={14} />}
+              >
                 <p>Delete</p>
               </Menu.Item>
             </Menu.Dropdown>

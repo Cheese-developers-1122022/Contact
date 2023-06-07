@@ -4,9 +4,13 @@ import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+// import Lottie from "lottie-react";
+// import Lottie from "lottie-web";
+// import RegisterIcon from "./register.json";
 import { useRegisterMutation } from "../../app/Authapi";
+import LoginLago from "./LoginLago";
 
 const Register = () => {
   const notify = () => toast("Here is your toast.");
@@ -34,75 +38,97 @@ const Register = () => {
   // const localStorage =
 
   return (
-    <div className=" bg-[#EFF9F0]  h-screen flex justify-center  items-center">
-      <div className="border-[1px] shadow-xl w-[1000px] p-10 rounded-md flex justify-around  items-center">
-        <form
-          onSubmit={form.onSubmit(async (values) => {
-            try {
-              const { data } = await register(values);
-              console.log(data);
-              console.log(values);
-              notify();
-              if (data?.success) {
-                nav("/login");
-              }
-            } catch (error) {
-              console.log(error);
-            }
-          })}
-          className=" w-[40%] flex flex-col gap-7"
-        >
-          <p className=" text-4xl font-extrabold">Sing Up</p>
-          <div className="  flex items-center gap-5">
-            <label htmlFor="">
-              <BsFillPersonFill className=" text-2xl" />
-            </label>
-            <TextInput
-              className=" w-[100%]   "
-              {...form.getInputProps("name")}
-              placeholder="Your Name"
-            />
-          </div>
-          <div className=" w-[100%] flex items-center gap-5">
-            <label htmlFor="">
-              <MdEmail className=" text-2xl" />
-            </label>
-            <TextInput
-              className=" w-[100%]   "
-              {...form.getInputProps("email")}
-              placeholder="Your Email"
-            />
-          </div>
-          <div className=" flex items-center gap-5">
-            <label htmlFor="">
-              <RiLockPasswordFill className=" text-2xl" />
-            </label>
-            <PasswordInput
-              className=" w-[100%] "
-              {...form.getInputProps("password")}
-              placeholder="Password "
-            />
-          </div>
-          <div className=" flex items-center gap-5">
-            <label htmlFor="">
-              <RiLockPasswordFill className=" text-2xl" />
-            </label>
-            <PasswordInput
-              className=" w-[100%]   "
-              {...form.getInputProps("password_confirmation")}
-              placeholder="Password confirmation"
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className=" bg-blue-600 px-7 py-2 text-white rounded"
+    <div className="min-h-screen">
+      <div className="  flex justify-center  items-center">
+        <div className=" shadow-xl w-[1000px]  m-3  border-2 rounded-md">
+          <p className=" text-4xl flex justify-center mt-10 font-extrabold">
+            Register Now
+          </p>
+          <div className="  p-3 sm:p-5  flex justify-around  items-center ">
+            <form
+              onSubmit={form.onSubmit(async (values) => {
+                try {
+                  const { data } = await register(values);
+                  console.log(data);
+                  console.log(values);
+                  notify();
+                  if (data?.success) {
+                    nav("/login");
+                  }
+                } catch (error) {
+                  console.log(error);
+                }
+              })}
+              className=" w-[100%] xl:w-[40%] lg:w-[40%]  p-2 flex flex-col gap-7"
             >
-              register
-            </button>
+              <div className="  flex items-center gap-5">
+                <label htmlFor="">
+                  <BsFillPersonFill className=" text-2xl" />
+                </label>
+                <TextInput
+                  className=" w-[100%]   "
+                  {...form.getInputProps("name")}
+                  placeholder="Your Name"
+                />
+              </div>
+              <div className=" w-[100%] flex items-center gap-5">
+                <label htmlFor="">
+                  <MdEmail className=" text-2xl" />
+                </label>
+                <TextInput
+                  className=" w-[100%]   "
+                  {...form.getInputProps("email")}
+                  placeholder="Your Email"
+                />
+              </div>
+              <div className=" flex items-center gap-5">
+                <label htmlFor="">
+                  <RiLockPasswordFill className=" text-2xl" />
+                </label>
+                <PasswordInput
+                  className=" w-[100%] "
+                  {...form.getInputProps("password")}
+                  placeholder="Password "
+                />
+              </div>
+              <div className=" flex flex-col  gap-5">
+                <div className=" flex justify-center gap-5">
+                  <label htmlFor="">
+                    <RiLockPasswordFill className=" text-2xl" />
+                  </label>
+                  <PasswordInput
+                    className=" w-[100%]   "
+                    {...form.getInputProps("password_confirmation")}
+                    placeholder="Password confirmation"
+                  />
+                </div>
+                <div className=" justify-center flex items-center gap-2 ">
+                  <p className=" text-sm md:text-md lg:text-md xl:text-md ">
+                    Already have an account?
+                  </p>
+                  <Link
+                    className=" underline text-xs md:text-md lg:text-md xl:text-md text-blue-600"
+                    to={`/login`}
+                  >
+                    Sign In
+                  </Link>
+                </div>
+              </div>
+              <div className=" flex flex-col ">
+                <button
+                  disabled={isLoading && true}
+                  type="submit"
+                  className=" bg-blue-600 px-7 py-2  mx-auto  text-white rounded"
+                >
+                  register
+                </button>
+              </div>
+            </form>
+            <div className=" w-[0] sm:w-[90%] lg:w-[60%] md:[60%] xl:w-[60%] ">
+              <LoginLago />
+            </div>
           </div>
-        </form>
-        <div className=" w-[20%]"></div>
+        </div>
       </div>
     </div>
   );

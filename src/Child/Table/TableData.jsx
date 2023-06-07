@@ -18,7 +18,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlinePencil } from "react-icons/hi";
 import { Menu, Tooltip } from "@mantine/core";
 import Cookies from "js-cookie";
-import { doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../DataConfig/firestore";
 
 const TableData = (props) => {
@@ -28,7 +28,6 @@ const TableData = (props) => {
     email,
     phoneNumber,
     job,
-    date,
     company,
     address,
     note,
@@ -47,7 +46,6 @@ const TableData = (props) => {
     e.stopPropagation();
     try {
       await updateDoc(updateDocRef, { fav: true });
-      window.onload;
     } catch (e) {
       console.log(e);
     }
@@ -57,7 +55,14 @@ const TableData = (props) => {
     e.stopPropagation();
     try {
       await updateDoc(updateDocRef, { fav: false });
-      window.onload;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const del = async (e) => {
+    e.stopPropagation();
+    try {
+      await deleteDoc(updateDocRef);
     } catch (e) {
       console.log(e);
     }
@@ -84,24 +89,26 @@ const TableData = (props) => {
       </td>
       <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
         <div className="">
-          <h3 className=" font-mono">{name}</h3>
-          <p className="text-gray-500 cursor-pointer text-sm">09298414102</p>
+          <h3 className=" font-body dark:text-white/80">{name}</h3>
+          <p className="text-gray-500 cursor-pointer font-mono text-sm dark:text-white/90">
+            09298414102
+          </p>
         </div>
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 font-semibold font-serif text-left tracking-wide text-gray-900 dark:text-white/90">
         <a href="" className="hover:border-b-[2px] border-gray-400">
           {email}
         </a>
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 font-semibold font-mono text-left tracking-wide text-gray-900 dark:text-white/90">
         <a href="https://www.google.com/maps/place/Landon" onClick={place}>
           {address}
         </a>
       </td>
-      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 font-semibold text-left tracking-wide text-gray-900 dark:text-white/90">
         <div className="flex flex-wrap gap-2">
           {job ? (
-            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold">
+            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold font-mono">
               {job}
             </span>
           ) : (

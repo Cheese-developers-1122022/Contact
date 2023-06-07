@@ -14,7 +14,6 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../DataConfig/firestore";
 import Cookies from "js-cookie";
 import DetailEdit from "../../DetailComponent/DetailControl";
-import { User } from "tabler-icons-react";
 const Detail = () => {
   const [user, setUser] = useState([]);
   const [newImage, setNewImage] = useState([]);
@@ -23,12 +22,12 @@ const Detail = () => {
   useEffect(() => {
     console.log(edit);
   });
-  const date = new Date().toLocaleString("en-GB", {
+  const dateTime = new Date().toLocaleString("en-GB", {
     hour12: true,
     hour: "2-digit",
     minute: "2-digit",
   });
-  console.log(user.date);
+  console.log(user?.date);
   // const dateObj = new Date(user.date.seconds * 1000);
   // console.log(dateObj);
   const UserId = useParams();
@@ -39,15 +38,23 @@ const Detail = () => {
 
   const UserData = async () => {
     try {
-      const data = await getDoc(UserRef);
-      setUser(data?.data());
+      const unsubscribe = onSnapshot(UserRef, (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+          setUser(data);
+        } else {
+          setUser(null);
+        }
+      });
+      // const data = await getDoc(UserRef);
+      // setUser(data?.data());
     } catch (e) {
       console.error(e);
     }
   };
   useEffect(() => {
     UserData();
-  }, [edit]);
+  }, [edit, user]);
   console.log(user?.imageUrl);
   const submit = () => {
     confirmAlert({
@@ -100,18 +107,18 @@ const Detail = () => {
                 onClick={open}
               >
                 {/* image condition sis ya ml */}
-                {user?.imageUrl == null? (
-                  <div className="flex items-center justify-center bg-[#D8D8D8] sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
-                    <h2 className=" uppercase text-4xl font-medium  text-black">
-                      {user?.name?.charAt(0)}
-                    </h2>
-                  </div>
-                ) : (
+                {user?.imageUrl ? (
                   <img
                     src={user.imageUrl}
                     alt=""
                     className=" sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover"
                   />
+                ) : (
+                  <div className="flex items-center justify-center bg-[#D8D8D8] sm:w-[90px] sm:h-[90px] md:w-[130px] md:h-[130px] lg:h-[170px] lg:w-[170px] object-cover">
+                    <h2 className=" uppercase text-4xl font-medium  text-black">
+                      {user?.name?.charAt(0)}
+                    </h2>
+                  </div>
                 )}
               </div>
             </div>
@@ -136,8 +143,8 @@ const Detail = () => {
                   />
                 </div>
                 <div className="text-center mt-5">
-                  <h3 className="text-lg font-semibold">{user.name}</h3>
-                  <p>{user.email}</p>
+                  <h3 className="text-lg font-semibold">{user?.name}</h3>
+                  <p>{user?.email}</p>
                   <div className="flex justify-center mt-5">
                     <TextInput
                       value={newImage}
@@ -149,7 +156,7 @@ const Detail = () => {
               </div>
             </Modal>
             <div className="flex flex-col">
-              <h3 className="text-lg font-semibold ">{user.name}</h3>
+              <h3 className="text-lg font-semibold ">{user?.name}</h3>
               {/* <a
                 href="tel:09-9729374073"
                 className="text-gray-500 font-medium text-sm"
@@ -157,12 +164,12 @@ const Detail = () => {
                 09-9729374073
               </a> */}
               <p className="text-gray-700 font-medium text-sm mt-1">
-                {user.job}
+                {user?.job}
               </p>
             </div>
           </div>
         </div>
-        <DetailEdit edit={edit} setEdit={setEdit} />
+        <DetailEdit user={user} edit={edit} setEdit={setEdit} />
       </div>
       {!edit ? (
         <div className="mt-5">
@@ -175,7 +182,7 @@ const Detail = () => {
               </h3>
               <p className="">
                 Last edited :{" "}
-                <span className="text-gray-700">{`Today,${date}`}</span>
+                <span className="text-gray-700">{`Today,${dateTime}`}</span>
               </p>
             </div>
           </div>

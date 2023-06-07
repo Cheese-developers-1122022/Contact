@@ -4,25 +4,26 @@ import { db } from "../../DataConfig/firestore";
 import Cookies from "js-cookie";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
-import { GrClose } from "react-icons/gr";
-import { BiImageAdd, BiPencil } from "react-icons/bi";
-import { BsTrash } from "react-icons/bs";
+import { GrClose, GrMail } from "react-icons/gr";
 import toast, { Toaster } from "react-hot-toast";
-// import {
-//   IconUser,
-//   IconNotes,
-//   IconMailFilled,
-//   IconCalendar,
-//   IconPhone,
-//   IconBuildingSkyscraper,
-//   IconMapPinFilled,
-// } from "@";
+import { BiImageAdd, BiPencil, BiMap } from "react-icons/bi";
+import {
+  BsTrash,
+  BsFillPersonFill,
+  BsFillTelephoneFill,
+  BsPersonWorkspace,
+  BsFillBuildingsFill,
+} from "react-icons/bs";
+import { SlCalender } from "react-icons/sl";
+import { CgNotes } from "react-icons/cg";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 // import "react-phone-number-input/style.css";
 // import "./CreateContact.css";
 import { TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { Loader } from "@mantine/core";
+import { RxCross2 } from "react-icons/rx";
+
 import moment from "moment";
 const ContactCreate = () => {
   const [load, setLoad] = useState(true);
@@ -36,20 +37,24 @@ const ContactCreate = () => {
   const [note, setNote] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const userToken = Cookies?.get("User");
-  const [opened, { open, close }] = useDisclosure(false);
+  const [openedImageModal, { open: openImageModal, close: closeImageModal }] =
+    useDisclosure(false);
+  const [openedEditModal, { open: openEditModal, close: closeEditModal }] =
+    useDisclosure(false);
   const userData = JSON.parse(Cookies.get("Info"));
   const userEmail = userData.email;
   const navigate = useNavigate();
   console.log(userEmail);
+
   const handleEdit = () => {
-    const inputElement = document.getElementById("upload");
-    inputElement.click();
-    close();
+    closeEditModal();
+    openImageModal();
+    setImage("");
   };
 
   const handleDelete = () => {
     setImage(null);
-    close();
+    closeEditModal();
   };
   console.log(imageUrl);
   const contactData = collection(db, userEmail);
@@ -66,26 +71,26 @@ const ContactCreate = () => {
         phoneNumber,
         address,
         note,
-        // imageUrl: JSON.stringify(imageUrl),
+        imageUrl,
+        fav: false,
       });
-      
       toast.success("Successfully!");
-    navigate("/")
+      navigate("/");
     } catch (e) {
       console.error(e);
       setLoad(true);
     }
   };
   console.log(date);
-
+  console.log(imageUrl);
   return (
     <div className="relative w-screen flex  flex-col p-5 md:items-center ">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" />
       <div className="  flex justify-between items-end  md:self-start p-3">
         <div className=" md:hidden">
           <Link to={"/"}>
-            <button className="text-lg  close-btn">
-              <GrClose className="" />
+            <button className="text-xl  close-btn">
+              <RxCross2 className=" dark:text-white/70" />
             </button>
           </Link>
         </div>
@@ -101,90 +106,113 @@ const ContactCreate = () => {
         </div>
       </div>
       <hr className=" text-gray-900 md:hidden" />
-      <div className=" flex flex-col items-center md:items-baseline gap-5 mt-5 md:mt-3">
+      <div className=" flex flex-col items-center md:items-baseline gap-5 mt-3">
+        <div className="mb-3 hidden md:block">
+          <Link to={"/"}>
+            <button className="text-xl  close-btn">
+              <RxCross2 className=" dark:text-white/70" />
+            </button>
+          </Link>
+        </div>
         <div>
-          <div className="mb-3 hidden md:block">
-            <Link to={"/"}>
-              <button className=" text-lg absolute top-6 left-6   close-btn">
-                <GrClose className=" " />
-              </button>
-            </Link>
-          </div>
-          <div
-            className={`${
-              imageUrl ? "bg-none" : "bg-sky-200"
-            } w-32 h-32 border md:w-40 md:h-40 rounded-[5rem] relative flex items-center justify-center`}
+          <form
+            action=""
+            className=" flex flex-col items-center md:block"
+            onSubmit={addContact}
           >
-            <label htmlFor="upload" className="cursor-pointer">
-              <input
-                id="upload"
-                type="file"
-                className="hidden"
-                onChange={(e) => setImageUrl(e.target.files[0])}
-              />
+            <div
+              className={`${
+                imageUrl ? "bg-none" : "bg-gray-300"
+              } w-32 h-32 border md:w-40 md:h-40 rounded-[5rem] relative  flex items-center justify-center`}
+            >
               {imageUrl ? (
                 <img
-                  src={URL.createObjectURL(imageUrl)}
-                  alt="Selected image"
-                  className="w-32 h-32 md:w-40 md:h-40 rounded-[5rem] object-cover"
+                  src={imageUrl}
+                  alt="Contact"
+                  className="w-full h-full object-cover rounded-[5rem]"
                 />
               ) : (
-                <div>
+                <div onClick={openImageModal}>
                   <BiImageAdd className=" text-4xl" />
                 </div>
               )}
-            </label>
-            <div>
-              <div
-                className={`${
-                  imageUrl ? "block" : "hidden"
-                } absolute float-right bottom-2 right-2 `}
-              >
-                <button
-                  className=" w-8 h-8 border  flex items-center justify-center  bg-white rounded-[3rem] "
-                  onClick={open}
-                >
-                  <BiPencil className="text-blue-600" />
-                </button>
-              </div>
               <div className={`${imageUrl ? { close } : ""}`}>
                 <Modal
-                  opened={opened}
-                  onClose={close}
-                  title="Edit"
+                  opened={openedImageModal}
+                  onClose={closeImageModal}
+                  title="Upload Image"
                   centered
                   size={250}
                 >
                   <div className=" bg-white rounded-md  ">
                     <div className=" flex flex-col gap-3 ">
-                      <div
-                        className=" flex gap-3 items-center hover:bg-gray-200 p-3"
-                        onClick={handleEdit}
+                      <TextInput
+                        type="text"
+                        className=""
+                        value={imageUrl}
+                        placeholder="Enter image url"
+                        onChange={(e) => setImageUrl(e.target.value)}
+                      />
+                      <button
+                        className=" px-4 py-1 text-white rounded-md bg-blue-600"
+                        onClick={closeImageModal}
                       >
-                        <BiImageAdd className=" text-gray-500 text-lg" />
-                        <h4>Change picture</h4>
-                      </div>
-                      <div
-                        className=" flex gap-3 items-center hover:bg-gray-200 p-3"
-                        onClick={handleDelete}
-                      >
-                        <BsTrash className="text-gray-500 text-lg" />
-                        <h4>Delete picture</h4>
-                      </div>
+                        Save
+                      </button>
                     </div>
                   </div>
                 </Modal>
               </div>
+              <div>
+                <div
+                  className={`${
+                    imageUrl ? "block" : "hidden"
+                  } absolute float-right bottom-2 right-2 `}
+                >
+                  {/* {imageUrl && (
+                    <button
+                      className="w-8 h-8 border flex items-center justify-center bg-white rounded-[3rem]"
+                      onClick={openEditModal}
+                    >
+                      <BiPencil className="text-blue-600" />
+                    </button>
+                  )} */}
+                </div>
+                <div className={`${imageUrl ? { close } : ""}`}>
+                  <Modal
+                    opened={openedEditModal}
+                    onClose={closeEditModal}
+                    title="Edit"
+                    centered
+                    size={250}
+                  >
+                    <div className=" bg-white rounded-md  ">
+                      <div className=" flex flex-col gap-3 ">
+                        <div
+                          className=" flex gap-3 items-center hover:bg-gray-200 p-3"
+                          onClick={handleEdit}
+                        >
+                          <BiImageAdd className=" text-gray-500 text-lg" />
+                          <h4>Change picture</h4>
+                        </div>
+                        <div
+                          className=" flex gap-3 items-center hover:bg-gray-200 p-3"
+                          onClick={handleDelete}
+                        >
+                          <BsTrash className="text-gray-500 text-lg" />
+                          <h4>Delete picture</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </Modal>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div>
-          <form action="" onSubmit={addContact}>
             <div>
               <TextInput
                 type="text"
                 label="Name"
-                // icon={<IconUser />}
+                icon={<BsFillPersonFill />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px] "
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -195,7 +223,7 @@ const ContactCreate = () => {
               <TextInput
                 type="tel"
                 label="Phone number"
-                // icon={<IconPhone />}
+                icon={<BsFillTelephoneFill />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px]"
                 placeholder="Phone number"
                 value={phoneNumber}
@@ -206,7 +234,8 @@ const ContactCreate = () => {
               <TextInput
                 type="text"
                 label="Email"
-                // icon={<IconMailFilled />}
+                icon={<GrMail />}
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                 className="   w-[300px] md:w-[500px] lg:w-[550px]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -217,7 +246,7 @@ const ContactCreate = () => {
               <TextInput
                 type="text"
                 label="Address"
-                // icon={<IconMapPinFilled />}
+                icon={<BiMap />}
                 className="   w-[300px] md:w-[500px] lg:w-[550px]"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -228,11 +257,11 @@ const ContactCreate = () => {
               <DateInput
                 type="text"
                 label="Birthday"
-                // icon={<IconCalendar />}
+                icon={<SlCalender />}
                 valueFormat="DD/MM/YYYY "
                 className="w-[300px] md:w-[500px] lg:w-[550px]"
                 value={date}
-                onChange={(date) => setDate(date)}
+                onChange={setDate}
                 placeholder="Birthday"
               />
               <p className="text-gray-500 mt-1">DD/MM/YY</p>
@@ -241,38 +270,41 @@ const ContactCreate = () => {
               <TextInput
                 type="text"
                 label="Job"
-                // icon={<IconBuildingSkyscraper />}
+                icon={<BsPersonWorkspace />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px]"
                 value={job}
                 onChange={(e) => setJob(e.target.value)}
                 placeholder="Job"
               />
             </div>
+            <div className="mt-3 ">
+              <TextInput
+                type="text"
+                label="Company"
+                icon={<BsFillBuildingsFill />}
+                className=" w-[300px] md:w-[500px] lg:w-[550px]"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                placeholder="Company"
+              />
+            </div>
             <div className=" mt-3">
               <TextInput
                 type="text"
                 label="Note"
-                // icon={<IconNotes />}
+                icon={<CgNotes />}
                 className=" w-[300px] md:w-[500px] lg:w-[550px]"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="Add note"
               />
             </div>
-            <>
-              {load ? (
-                <button
-                  type="submit"
-                  className=" px-6 py-2 text-white rounded-md  bg-blue-500 hover:bg-blue-600 mt-5 hidden md:block "
-                >
-                  Create Contact
-                </button>
-              ) : (
-                <button className=" px-6 py-2 text-white rounded-md  bg-blue-500 hover:bg-blue-600 mt-5 hidden md:block  disabled:bg-blue-400">
-                  <Loader color="red" size="sm" variant="dots" />
-                </button>
-              )}
-            </>
+            <button
+              type="submit"
+              className=" px-6 py-2 text-white rounded-md  bg-blue-500 hover:bg-blue-600 mt-5 hidden md:block "
+            >
+              Create Contact
+            </button>
           </form>
         </div>
       </div>

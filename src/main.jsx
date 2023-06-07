@@ -8,11 +8,11 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <DarkModeContextProvider>
+  <DarkModeContextProvider>
+    <BrowserRouter>
       <Provider store={store}>
         <App />
       </Provider>
-    </DarkModeContextProvider>
-  </BrowserRouter>
+    </BrowserRouter>
+  </DarkModeContextProvider>
 );

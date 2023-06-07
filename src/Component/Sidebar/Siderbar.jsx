@@ -5,10 +5,10 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Siderbar = () => {
   const side = useSelector((state) => state.light.light);
-const count=useSelector((state)=>state.light.users)
-console.log(count)
+  const count = useSelector((state) => state.light.users);
+  console.log(count);
   return (
-    <div className="bg-[#D8D8D8]">
+    <div className="bg-[#f7f6f6] dark:bg-gray-600 ">
       <div
         className={
           side
@@ -16,21 +16,29 @@ console.log(count)
             : "translate-x-[-300px] ease-in  duration-[0.15s]  w-0  z-[1000] md:z-[1] lg:relative absolute"
         }
       >
-        <div className="  h-full md:min-h-screen items-center flex gap-y-4 flex-col bg-[#D8D8D8]">
+        <div className=" min-h-screen items-center flex gap-y-4 flex-col bg-[#f7f6f6] dark:bg-gray-600">
+          <div className=" py-2">
+            {/* <RiContactsFill className=" text-3xl " /> */}
+            <h1 className="md:hidden block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
+              ConnectX
+            </h1>
+          </div>
           <div className="py-2">
             <NavLink to="/create">
-              <button className="px-2 hover:shadow-lg font-sans shadow-[#484545] duration-[1s] py-1 bg-slate-300 items-center gap-1 text-lg font-medium rounded-lg flex ">
+              <button className="px-2 hover:shadow-lg font-sans shadow-[#484545] duration-[1s] py-1 bg-slate-200 items-center gap-1 font-medium rounded-md flex ">
                 <LuUserPlus />
-                Create Context
+                Create Contact
               </button>
             </NavLink>
           </div>
           <div className="">
             <NavLink to="/">
-              <button className="flex items-center px-4 py-2 rounded hover:bg-slate-200 gap-6 justify-around">
-                <BsPersonFill />
-                <h2 className="">Contacts</h2>
-                <span className="px-2 bg-slate-300 rounded-full">
+              <button className="flex items-center px-4 py-2 rounded hover:bg-slate-200 dark:hover:bg-gray-500 gap-6 justify-around">
+                <BsPersonFill className=" dark:text-white" />
+                <h2 className=" font-body font-medium  dark:text-white ">
+                  Contacts
+                </h2>
+                <span className="px-2 bg-slate-200 rounded-full">
                   {count.length}
                 </span>
               </button>

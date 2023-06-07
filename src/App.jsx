@@ -7,37 +7,41 @@ import RouteGuard from "./Component/Sidebar/RouteGuard";
 import ContactsPage from "./Path/ContactsPage";
 import ContractsCreatePage from "./Path/ContractsCreatePage";
 import DetailPage from "./Path/DetailPage";
+import SearchPage from "./Path/SearchPage";
 
 const App = () => {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <RouteGuard>
-            <ContactsPage />
-          </RouteGuard>
-        }
-      />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/create"
-        element={
-          <RouteGuard>
-            <ContractsCreatePage />
-          </RouteGuard>
-        }
-      />
-      <Route
-        path="/details/:id"
-        element={
-          <RouteGuard>
-            <DetailPage/>
-          </RouteGuard>
-        }
-      />
-    </Routes>
+    <div className=" dark:bg-gray-900 ">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RouteGuard>
+              <ContactsPage />
+            </RouteGuard>
+          }
+        />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/create"
+          element={
+            <RouteGuard>
+              <ContractsCreatePage />
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/details/:id"
+          element={
+            <RouteGuard>
+              <DetailPage />
+            </RouteGuard>
+          }
+        />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </div>
   );
 };
 
