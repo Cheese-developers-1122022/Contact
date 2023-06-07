@@ -30,25 +30,32 @@ const Login = () => {
   console.log(phoneNumber);
   console.log(address);
   return (
-    <form onSubmit={formHandler}>
-      <div className="flex flex-col gap-4">
-        <input type="text" ref={nameRef} className="p-4" placeholder="Name" />
-        <input type="text" ref={emailRef} className="p-4" placeholder="Email" />
-        <input
-          type="text"
-          ref={AddressRef}
-          className="p-4"
-          placeholder="Address"
-        />
-        <input
-          type="text"
-          ref={phoneNumberRef}
-          className="p-4"
-          placeholder="PhoneNumber"
-        />
-        <button type="submit">Create</button>
-      </div>
-    </form>
+    <div className=" ">
+      <form onSubmit={formHandler}>
+        <div className="flex flex-col gap-4">
+          <input type="text" ref={nameRef} className="p-4" placeholder="Name" />
+          <input
+            type="text"
+            ref={emailRef}
+            className="p-4"
+            placeholder="Email"
+          />
+          <input
+            type="text"
+            ref={AddressRef}
+            className="p-4"
+            placeholder="Address"
+          />
+          <input
+            type="text"
+            ref={phoneNumberRef}
+            className="p-4"
+            placeholder="PhoneNumber"
+          />
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

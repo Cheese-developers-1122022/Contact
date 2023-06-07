@@ -22,6 +22,7 @@ import { TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { Loader } from "@mantine/core";
 import { RxCross2 } from "react-icons/rx";
+import "./ContactCreate.css"
 
 import moment from "moment";
 const ContactCreate = () => {
@@ -96,7 +97,7 @@ const ContactCreate = () => {
           <Link>
             <button
               onClick={addContact}
-              className={` text-white bg-blue-500 rounded-md px-5 py-1`}
+              className={` text-white bg-blue-500 font-serif rounded-md px-5 py-1`}
             >
               Create
             </button>
@@ -301,7 +302,7 @@ const ContactCreate = () => {
             </div>
             <button
               type="submit"
-              className=" px-6 py-2 text-white rounded-md  bg-blue-500 hover:bg-blue-600 mt-5 hidden md:block "
+              className=" px-6 py-2 text-white rounded-md  bg-blue-500 hover:bg-blue-600 font-serif mt-5 hidden md:block "
             >
               Create Contact
             </button>

@@ -34,13 +34,13 @@ const Recently = () => {
   };
   console.log(filterFavorite);
   return (
-    <div className="flex items-center relative">
+    <div className="flex items-center relative px-3">
       <div className=" min-w-full w-[90vw] justify-start sm:w-[90vw] md:w-[90vw] lg:w-[70vw] xl:w-[85vw] overflow-x-scroll scroll-custom flex items-center gap-5 scroll-smooth py-4">
         {filterFavorite?.map((item) => {
           return (
             <div
               key={item?.id}
-              className="flex min-w-[350px] sm:min-w-[360px] md:min-w-[370px] lg:min-w-[380px] xl:min-w-[380px] flex-col p-5 rounded-lg shadow-lg shadow-blue-100 gap-3 justify-center user-card"
+              className="flex min-w-[350px] sm:min-w-[360px] md:min-w-[370px] lg:min-w-[380px] xl:min-w-[380px] flex-col p-5 rounded-lg shadow-lg shadow-blue-100 dark:shadow-none dark:bg-gray-700 gap-3 justify-center user-card"
               onClick={userEmailAndCall}
             >
               <Link to={`/details/${item?.id}`}>
@@ -62,11 +62,11 @@ const Recently = () => {
                       )}
                     </div>
                     <div className="">
-                      <h3 className="font-semibold">{item?.name}</h3>
+                      <h3 className="font-semibold dark:text-white font-body">{item?.name}</h3>
                       <a
                         href={`tel:${item?.phoneNumber}`}
                         onClick={call}
-                        className="text-gray-500 cursor-pointer text-sm"
+                        className="text-gray-500 dark:text-white/80 cursor-pointer font-mono text-sm"
                       >
                         {item?.phoneNumber}
                       </a>
@@ -81,11 +81,11 @@ const Recently = () => {
                 <a
                   href={`https://www.google.com/maps/place/${item?.address}`}
                   onClick={place}
-                  className="text-gray-600 font-[500] mb-1"
+                  className="text-gray-600 dark:text-white/80 font-[500] font-mono mb-1"
                 >
                   {item?.address}
                 </a>
-                <p className=" text-gray-600 font-[500] text-sm">
+                <p className=" text-gray-600 dark:text-white/80 font-[500] font-mono text-sm">
                   {item?.email}
                 </p>
               </div>
@@ -95,7 +95,7 @@ const Recently = () => {
                     open();
                     e.stopPropagation();
                   }}
-                  className="flex items-center gap-2 px-4 py-1 text-gray-400 text-email text-sm"
+                  className="flex items-center gap-2 px-4 py-1 text-gray-400 dark:text-white/70 text-email font-serif text-sm"
                 >
                   <AiOutlineMail /> Send Email
                 </button>
@@ -126,7 +126,7 @@ const Recently = () => {
                   // tel need
                   onClick={call}
                   href={`tel:${item?.phoneNumber}`}
-                  className="flex items-center gap-2 px-4 py-1 text-gray-400 text-call text-sm"
+                  className="flex items-center gap-2 px-4 py-1 text-gray-400 dark:text-white/70 font-serif text-call text-sm"
                 >
                   <BiPhoneCall /> Call
                 </a>

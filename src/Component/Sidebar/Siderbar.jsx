@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LuUserPlus } from "react-icons/lu";
 import { BsPersonFill } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Siderbar = () => {
   const side = useSelector((state) => state.light.light);
@@ -17,15 +17,17 @@ const Siderbar = () => {
         }
       >
         <div className=" min-h-screen items-center flex gap-y-4 flex-col bg-[#f7f6f6] dark:bg-gray-600">
-          <div className=" py-2">
-            {/* <RiContactsFill className=" text-3xl " /> */}
-            <h1 className="md:hidden block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
-              ConnectX
-            </h1>
-          </div>
+          <Link to={"/"}>
+            <div className=" py-2">
+              {/* <RiContactsFill className=" text-3xl " /> */}
+              <h1 className="md:hidden block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
+                ConnectX
+              </h1>
+            </div>
+          </Link>
           <div className="py-2">
             <NavLink to="/create">
-              <button className="px-2 hover:shadow-lg font-sans shadow-[#484545] duration-[1s] py-1 bg-slate-200 items-center gap-1 font-medium rounded-md flex ">
+              <button className="px-2 hover:shadow-lg  shadow-[#484545] duration-[1s] py-1 bg-slate-200 items-center gap-1 font-medium font-serif rounded-md flex ">
                 <LuUserPlus />
                 Create Contact
               </button>
@@ -38,7 +40,7 @@ const Siderbar = () => {
                 <h2 className=" font-body font-medium  dark:text-white ">
                   Contacts
                 </h2>
-                <span className="px-2 bg-slate-200 rounded-full">
+                <span className="px-2 bg-slate-200 font-mono rounded-full">
                   {count.length}
                 </span>
               </button>

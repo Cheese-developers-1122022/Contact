@@ -77,7 +77,7 @@ const DetailEdit = ({ edit, setEdit, user }) => {
                 color="red"
                 icon={<AiOutlineDelete size={14} />}
               >
-                <p>Delete</p>
+                <p className=" font-serif">Delete</p>
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
@@ -90,12 +90,12 @@ const DetailEdit = ({ edit, setEdit, user }) => {
           }}
         >
           {!edit ? (
-            <button className="px-5 py-1 bg-blue-600 text-white text-sm font-semibold rounded">
+            <button className="px-5 py-1 bg-blue-600 text-white text-sm font-semibold font-serif rounded">
               Edit
             </button>
           ) : (
             <button
-              className="px-5 py-1 bg-blue-600 text-white text-sm font-semibold rounded"
+              className="px-5 py-1 bg-blue-600 text-white text-sm font-semibold font-serif rounded"
               onClick={(e) => {
                 e.stopPropagation();
                 if (

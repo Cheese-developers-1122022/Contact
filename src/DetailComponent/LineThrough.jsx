@@ -9,7 +9,7 @@ const LineThrough = ({ user }) => {
       <div className="pt-6 absolute top-[-2.6rem] left-16 sm:left-24 md:left-36 lg:left-36">
         <div className="flex gap-4 items-center">
           <div
-            className={`p-2 bg-slate-100 shadow-md shadow-cyan-200 rounded-full`}
+            className={`p-2 bg-slate-100 dark:bg-gray-200 dark:shadow-none shadow-md shadow-cyan-200  rounded-full`}
           >
             <Tooltip
               label="Email"
@@ -31,7 +31,7 @@ const LineThrough = ({ user }) => {
             </Tooltip>
           </div>
           <div
-            className={`p-2 bg-slate-100 shadow-md shadow-cyan-200 rounded-full`}
+            className={`p-2 bg-slate-100 dark:bg-gray-200 dark:shadow-none shadow-md shadow-cyan-200 rounded-full`}
           >
             <Tooltip
               label="Schedule"
@@ -53,7 +53,7 @@ const LineThrough = ({ user }) => {
             </Tooltip>
           </div>
           <div
-            className={`p-2 bg-slate-100 shadow-md shadow-cyan-200 rounded-full`}
+            className={`p-2 bg-slate-100 dark:bg-gray-200 dark:shadow-none shadow-md shadow-cyan-200 rounded-full`}
           >
             <Tooltip
               label="Chat"

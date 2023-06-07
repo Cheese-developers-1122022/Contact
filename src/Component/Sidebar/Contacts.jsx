@@ -68,10 +68,10 @@ const Contacts = () => {
             />
           </div>
           <div className="">
-            <h3 className="text-gray-800 font-semibold text-xl text-center mb-3">
+            <h3 className="text-gray-800 dark:text-white/80 font-semibold font-body text-xl text-center mb-3">
               No Contact
             </h3>
-            <p className="text-gray-600 text-center">
+            <p className="text-gray-600 dark:text-white/70 text-center font-mono">
               There are no contacts at the moment to add some friend
             </p>
           </div>
@@ -98,14 +98,14 @@ const Contacts = () => {
             <div className=""></div>
           ) : (
             <div className=" mt-5">
-              <h3 className="text-2xl text-blue-800 font-semibold mb-5 ml-5">
+              <h3 className="text-2xl text-blue-800 dark:text-blue-700 font-semibold font-body mb-5 ml-5">
                 Favorite
               </h3>
               <Recently />
             </div>
           )}
           <div className="mt-4">
-            <h3 className="text-2xl text-blue-800 font-semibold mb-5 ml-5">
+            <h3 className="text-2xl text-blue-800 dark:text-blue-700 font-semibold font-body mb-5 ml-5">
               Contact Lists
             </h3>
             <ContactList />

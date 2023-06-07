@@ -38,7 +38,7 @@ const Register = () => {
   // const localStorage =
 
   return (
-    <div className="min-h-screen relative md:block">
+    <div className="min-h-screen relative md:block dark:bg-white">
       <div className=" backdrop-blur-sm md:backdrop-blur-none mt-5 md:mt-0  bg-white/10 z-30 md:z-0 ">
         <div className="  flex justify-center  items-center">
           <div className=" shadow-xl w-[900px]  m-3  border rounded-md">

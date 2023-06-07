@@ -112,7 +112,7 @@ const Form = ({ close, data }) => {
             close();
             sendEmail();
           }}
-          className="flex btn-send items-center gap-1 px-4 py-1 text-sm bg-[#5097c7d2] hover:bg-[#5c96b8e5] transition duration-500 text-white"
+          className="flex btn-send items-center gap-1 px-4 py-1 text-sm bg-[#5097c7d2] hover:bg-[#5c96b8e5] transition duration-500 text-white font-serif"
         >
           Send <AiOutlineSend className="send-icons" />
         </button>

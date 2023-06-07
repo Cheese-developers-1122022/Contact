@@ -5,7 +5,7 @@ import { BsFillSunFill, BsFillMoonStarsFill, BsPerson } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt2 } from "react-icons/bi";
 import "./navbar.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers, lightToggle, removeUser } from "../../app/LightSlice";
 import Cookies from "js-cookie";
@@ -49,7 +49,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="py-3 dark:bg-gray-800">
+    <div className="py-3 dark:bg-gray-800 ">
       <div className="md:px-0 px-1 container mx-auto flex justify-between items-center">
         <div className=" flex items-center gap-1 md:gap-3">
           <button
@@ -62,12 +62,14 @@ const Navbar = () => {
           >
             <RxHamburgerMenu className=" text-2xl dark:text-white/70" />
           </button>
-          <div className=" ">
-            {/* <RiContactsFill className=" text-3xl " /> */}
-            <h1 className="hidden md:block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
-              ConnectX
-            </h1>
-          </div>
+          <Link to={"/"}>
+            <div className=" ">
+              {/* <RiContactsFill className=" text-3xl " /> */}
+              <h1 className="hidden md:block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
+                ConnectX
+              </h1>
+            </div>
+          </Link>
         </div>
         <div className="">
           <div className="relative ">

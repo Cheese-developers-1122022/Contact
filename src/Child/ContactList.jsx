@@ -42,8 +42,8 @@ const ContactList = () => {
     getUserData();
   }, []);
   return (
-    <div className=" overflow-y-scroll h-[360px] overflow-hidden scroll">
-      <Table verticalSpacing="xl" className="w-full">
+    <div className=" overflow-y-scroll h-[360px] px-3 overflow-hidden scroll">
+      <Table verticalSpacing="xl" className="w-full dark:bg-gray-800">
         <TableHead />
         <tbody className="" onClick={tbody}>
           {text?.map((data) => (

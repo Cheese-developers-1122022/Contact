@@ -3,6 +3,7 @@ import { DateInput } from "@mantine/dates";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
+import "./DetailEdit.css"
 import {
   BsCalendar,
   BsFlag,
@@ -65,7 +66,7 @@ const Edit = ({ edit, setEdit, user }) => {
   console.log(user.date);
   return (
     <div className="">
-      <form className="flex flex-col gap-4 w-[70%] border rounded-md p-3">
+      <form className="flex flex-col gap-4 w-[70%] border dark:border-gray-500 rounded-md p-3">
         <div className="flex justify-between gap-5">
           <TextInput
             placeholder={"Name"}
@@ -135,7 +136,7 @@ const Edit = ({ edit, setEdit, user }) => {
         <button
           type="submit"
           onClick={formSubmit}
-          className="px-3 py-1 text-sm bg-blue-600 rounded w-20 text-white font-semibold"
+          className="px-3 py-1 text-sm bg-blue-600 rounded w-20 text-white font-semibold font-serif"
         >
           Change
         </button>

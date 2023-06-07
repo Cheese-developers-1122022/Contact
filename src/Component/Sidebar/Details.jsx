@@ -74,12 +74,12 @@ const Detail = () => {
   };
   console.log(user?.imageUrl);
   return (
-    <div className=" w-[100vw] sm:w-[90vw] md:w-[80vw] mx-auto lg:w-[80%] xl:w-[80%] min-h-full px-0 sm:px-3 lg:px-8 md:px-4">
+    <div className=" w-[100vw] sm:w-[90vw] md:w-[80vw] mx-auto lg:w-[80%] xl:w-[80%] min-h-full px-0 sm:px-3 lg:px-8 md:px-4 ">
       <div className="m-5">
         {!edit ? (
           <Link to={"/"} className=" cursor-pointer">
             <h3>
-              <BsArrowLeft className="text-xl font-semibold" />
+              <BsArrowLeft className="text-xl font-semibold dark:text-white/70" />
             </h3>
           </Link>
         ) : (
@@ -94,7 +94,7 @@ const Detail = () => {
               className=" cursor-pointer"
             >
               <h3>
-                <RxCross2 className="text-xl font-semibold" />
+                <RxCross2 className="text-xl font-semibold dark:text-white/70" />
               </h3>
             </Link>
           </>
@@ -131,7 +131,7 @@ const Detail = () => {
           onClose={close}
           opened={opened}
           centered
-          title={<h3 className="text-lg font-semibold">Photo</h3>}
+          title={<h3 className="text-lg font-semibold font-body">Photo</h3>}
           transitionProps={{
             transition: "fade",
             duration: 400,
@@ -148,8 +148,8 @@ const Detail = () => {
               />
             </div>
             <div className="text-center mt-5">
-              <h3 className="text-lg font-semibold">{user?.name}</h3>
-              <p>{user?.email}</p>
+              <h3 className="text-lg font-semibold font-body">{user?.name}</h3>
+              <p className=" font-mono">{user?.email}</p>
               <div className="flex justify-center mt-5">
                 <TextInput
                   value={newImage}
@@ -161,10 +161,10 @@ const Detail = () => {
           </div>
         </Modal>
         <div className="flex flex-col">
-          <h3 className=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold ">
+          <h3 className=" text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold font-body dark:text-white/90 ">
             {user?.name}
           </h3>
-          <p className="text-gray-700 font-medium text-sm sm:text-sm md:text-base lg:text-base mt-1">
+          <p className="text-gray-700 dark:text-white/80 font-mono font-medium text-sm sm:text-sm md:text-base lg:text-base mt-1">
             {user?.job}
           </p>
         </div>
@@ -178,12 +178,12 @@ const Detail = () => {
           <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row justify-between gap-10 w-[80%] mt-16">
             <DetailCard user={user} />
             <div className="">
-              <h3 className="text-lg text-gray-800 flex items-center gap-1">
-                History <AiOutlineQuestionCircle className="text-gray-500" />
+              <h3 className="text-lg text-gray-800 dark:text-white/90  font-body flex items-center gap-1">
+                History <AiOutlineQuestionCircle className="text-gray-500 dark:text-white/70" />
               </h3>
-              <p className="">
+              <p className=" dark:text-white/80 font-serif">
                 Last edited :{" "}
-                <span className="text-gray-700">{`Today,${dateTime}`}</span>
+                <span className="text-gray-700 dark:text-white/80">{`Today,${dateTime}`}</span>
               </p>
             </div>
           </div>

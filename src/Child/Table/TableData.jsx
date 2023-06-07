@@ -89,7 +89,7 @@ const TableData = (props) => {
           </div>
         ) : (
           <div className="flex items-center justify-center bg-gray-300 rounded-full w-10 h-10 border-2 border-[#acacac] hover:border-blue-500">
-            <h2 className=" uppercase text-2xl font-semibold  text-black">
+            <h2 className=" uppercase text-2xl font-semibold  font-body text-black dark:text-white/90">
               {name?.charAt(0)}
             </h2>
           </div>
@@ -97,16 +97,16 @@ const TableData = (props) => {
       </td>
       <td className="px-3 py-4 font-semibold flex justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start 2xl:justify-start items-center tracking-wide text-gray-900">
         <div className="">
-          <h3 className=" font-mono">{name}</h3>
-          <p className="text-gray-500 cursor-pointer text-sm">{phoneNumber}</p>
+          <h3 className=" font-body dark:text-white/90">{name}</h3>
+          <p className="text-gray-500 font-mono dark:text-white/80 cursor-pointer text-sm">{phoneNumber}</p>
         </div>
       </td>
       <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900">
-        <a href="" className="hover:border-b-[2px] border-gray-400">
+        <a href="" className="hover:border-b-[1px] font-mono dark:text-white/80 border-gray-200">
           {email}
         </a>
       </td>
-      <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900">
+      <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900 dark:text-white/80 font-mono">
         <a href="https://www.google.com/maps/place/Landon" onClick={place}>
           {address}
         </a>
@@ -114,7 +114,7 @@ const TableData = (props) => {
       <td className="px-3 py-4 hidden sm:hidden md:hidden lg:hidden xl:table-cell 2xl:table-cell font-semibold tracking-wide text-gray-900">
         <div className="flex flex-wrap gap-2">
           {job ? (
-            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold">
+            <span className="px-3 py-1 text-white rounded bg-blue-500 text-[10px] font-semibold font-mono dark:text-white/80">
               {job}
             </span>
           ) : (
@@ -140,10 +140,10 @@ const TableData = (props) => {
                 {fav ? (
                   <BsStarFill
                     onClick={False}
-                    className=" text-lg cursor-pointer"
+                    className=" text-lg cursor-pointer dark:text-white/90"
                   />
                 ) : (
-                  <BsStar onClick={True} className=" text-lg cursor-pointer" />
+                  <BsStar onClick={True} className=" text-lg cursor-pointer dark:text-white/70" />
                 )}
               </div>
             </Tooltip>
@@ -159,7 +159,7 @@ const TableData = (props) => {
                 closeDelay={300}
               >
                 <div className="">
-                  <TbListDetails className="text-lg cursor-pointer" />
+                  <TbListDetails className="text-lg cursor-pointer dark:text-white/70 " />
                 </div>
               </Tooltip>
             </Link>
@@ -176,7 +176,7 @@ const TableData = (props) => {
               >
                 <Menu.Target>
                   <div className="" onClick={(e) => e.stopPropagation()}>
-                    <BsThreeDotsVertical className=" text-lg cursor-pointer" />
+                    <BsThreeDotsVertical className=" text-lg cursor-pointer dark:text-white/70" />
                   </div>
                 </Menu.Target>
                 <Menu.Dropdown size="xs">
