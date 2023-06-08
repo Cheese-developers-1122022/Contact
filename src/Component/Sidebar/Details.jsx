@@ -162,7 +162,7 @@ const Detail = () => {
       <DetailEdit edit={edit} setEdit={setEdit} user={user} />
 
       {!edit ? (
-        <div className="mt-5">
+        <div className="m-3">
           <LineThrough user={user} />
           <div className="flex flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row justify-between gap-10 w-[80%] mt-16">
             <DetailCard user={user} />

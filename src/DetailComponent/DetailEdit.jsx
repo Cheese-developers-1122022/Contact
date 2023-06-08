@@ -23,8 +23,8 @@ const Edit = ({ edit, setEdit, user }) => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
-  const [telephone, setTelephone] = useState(null);
-  const [birthday, setBirthday] = useState(null);
+  const [telephone, setTelephone] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [job, setJob] = useState("");
   const [note, setNote] = useState("");
   const handleDateChange = (date) => {
@@ -40,20 +40,21 @@ const Edit = ({ edit, setEdit, user }) => {
   }, []);
   const formSubmit = async (e) => {
     e.preventDefault();
-    alert("Are you sure?");
-    try {
-      await updateDoc(updateDocRef, {
-        name: firstName,
-        email,
-        address: country,
-        phoneNumber: telephone,
-        job,
-        note,
-        date: moment(birthday).format("LL"),
-      });
-      setEdit(!edit);
-    } catch (e) {
-      console.error(e);
+    if (confirm("Are you sure you want to Change?")) {
+      try {
+        await updateDoc(updateDocRef, {
+          name: firstName,
+          email,
+          address: country,
+          phoneNumber: telephone,
+          job,
+          note,
+          date: moment(birthday).format("LL"),
+        });
+        setEdit(!edit);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
   return (

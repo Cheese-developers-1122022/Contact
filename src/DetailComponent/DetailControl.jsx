@@ -65,7 +65,7 @@ const DetailEdit = ({ edit, setEdit, user }) => {
           >
             <Menu.Target>
               <div className="">
-                <BsThreeDotsVertical className=" text-lg cursor-pointer" />
+                <BsThreeDotsVertical className=" dark:text-white text-lg cursor-pointer" />
               </div>
             </Menu.Target>
             <Menu.Dropdown>

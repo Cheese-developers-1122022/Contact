@@ -12,6 +12,7 @@ const DetailCard = ({ user }) => {
         <p className="flex items-center">
           <AiOutlineMail className="text-gray-600 dark:text-white/70 mr-5 mb-0" />{" "}
           <Link
+          target="_se"
             to={`https://mail.google.com/mail/u/?authuser=${user?.email}`}
             className="text-blue-400 dark:text-blue-500 font-mono"
           >
@@ -27,6 +28,7 @@ const DetailCard = ({ user }) => {
         <p className="flex items-center">
           <BsFlag className="text-gray-600 dark:text-white/70 mr-5 mb-0" />
           <a
+            target="_self"
             href={`https://www.google.com/maps/place/${user?.address}`}
             onClick={(e) => e.stopPropagation()}
             className="text-gray-700  dark:text-white/80 font-serif"

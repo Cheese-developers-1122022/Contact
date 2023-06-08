@@ -68,13 +68,13 @@ const Recently = () => {
                       <h3 className="font-semibold dark:text-white font-body">
                         {item?.name}
                       </h3>
-                      <Link
+                      <a
                         href={`tel:${item?.phoneNumber}`}
                         onClick={call}
                         className="text-gray-500 dark:text-white/80 cursor-pointer font-mono text-sm"
                       >
                         {item?.phoneNumber}
-                      </Link>
+                      </a>
                     </div>
                   </div>
                   <div className="p-2 rounded-full bg-gray-100">
@@ -83,13 +83,13 @@ const Recently = () => {
                 </div>
               </div>
               <div className="p-2">
-                <Link
+                <a
                   href={`https://www.google.com/maps/place/${item?.address}`}
                   onClick={place}
                   className="text-gray-600 dark:text-white/80 font-[500] font-mono mb-1"
                 >
                   {item?.address}
-                </Link>
+                </a>
                 <p className=" text-gray-600 dark:text-white/80 font-[500] font-mono text-sm">
                   {item?.email}
                 </p>
@@ -126,13 +126,13 @@ const Recently = () => {
                 >
                   <Form close={close} data={item} />
                 </Modal>
-                <Link
+                <a
                   onClick={call}
                   href={`tel:${item?.phoneNumber}`}
                   className="flex items-center gap-2 px-4 py-1 text-gray-400 dark:text-white/70 font-serif text-call text-sm"
                 >
                   <BiPhoneCall /> Call
-                </Link>
+                </a>
               </div>
             </div>
           );
