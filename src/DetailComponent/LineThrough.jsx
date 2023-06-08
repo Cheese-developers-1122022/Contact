@@ -3,7 +3,6 @@ import React from "react";
 import { AiOutlineMail, AiOutlineSchedule } from "react-icons/ai";
 import { BsChatLeft } from "react-icons/bs";
 const LineThrough = ({ user }) => {
-  console.log(user);
   return (
     <div className=" border-t-2 relative my-5">
       <div className="pt-6 absolute top-[-2.6rem] left-16 sm:left-24 md:left-36 lg:left-36">

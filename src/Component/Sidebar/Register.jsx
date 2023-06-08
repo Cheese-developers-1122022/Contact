@@ -5,10 +5,6 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-// import Lottie from "lottie-react";
-// import Lottie from "lottie-web";
-// import RegisterIcon from "./register.json";
 import { useRegisterMutation } from "../../app/Authapi";
 import LoginLago from "./LoginLago";
 
@@ -32,11 +28,8 @@ const Register = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
       password: (value) =>
         value.length < 8 ? "Password must have at least 8 letters" : null,
-      // email: isEmail,
     },
   });
-  // const localStorage =
-
   return (
     <div className="min-h-screen relative md:block dark:bg-white">
       <div className=" backdrop-blur-sm md:backdrop-blur-none mt-5 md:mt-0  bg-white/10 z-30 md:z-0 ">
@@ -50,8 +43,6 @@ const Register = () => {
                 onSubmit={form.onSubmit(async (values) => {
                   try {
                     const { data } = await register(values);
-                    console.log(data);
-                    console.log(values);
                     notify();
                     if (data?.success) {
                       nav("/login");

@@ -10,7 +10,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import DetailCard from "../../DetailComponent/DetailCard";
 import Edit from "../../DetailComponent/DetailEdit";
 import LineThrough from "../../DetailComponent/LineThrough";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../DataConfig/firestore";
 import Cookies from "js-cookie";
 import DetailEdit from "../../DetailComponent/DetailControl";
@@ -19,21 +19,14 @@ const Detail = () => {
   const [newImage, setNewImage] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [edit, setEdit] = useState(false);
-  useEffect(() => {
-    console.log(edit);
-  });
   const dateTime = new Date().toLocaleString("en-GB", {
     hour12: true,
     hour: "2-digit",
     minute: "2-digit",
   });
-  console.log(user?.date);
-  // const dateObj = new Date(user.date.seconds * 1000);
-  // console.log(dateObj);
   const UserId = useParams();
   const storage = JSON.parse(Cookies?.get("Info"));
   const userDocName = storage.email;
-  console.log(UserId.id);
   const UserRef = doc(db, userDocName, UserId.id);
 
   const UserData = async () => {
@@ -46,8 +39,6 @@ const Detail = () => {
           setUser(null);
         }
       });
-      // const data = await getDoc(UserRef);
-      // setUser(data?.data());
     } catch (e) {
       console.error(e);
     }
@@ -55,7 +46,6 @@ const Detail = () => {
   useEffect(() => {
     UserData();
   }, [edit, user]);
-  console.log(user?.imageUrl);
   const submit = () => {
     confirmAlert({
       title: "You have unsaved changes",
@@ -72,7 +62,6 @@ const Detail = () => {
       ],
     });
   };
-  console.log(user?.imageUrl);
   return (
     <div className=" w-[100vw] sm:w-[90vw] md:w-[80vw] mx-auto lg:w-[80%] xl:w-[80%] min-h-full px-0 sm:px-3 lg:px-8 md:px-4 ">
       <div className="m-5">
@@ -103,7 +92,7 @@ const Detail = () => {
 
       <div className="flex justify-center items-center sm:justify-center sm:items-center md:justify-center md:items-center xl:justify-start lg:items-center xl:items-center lg:justify-start xl:ml-40 lg:ml-28 flex-col sm:flex-col md:flex-col lg:flex-row xl:flex-row gap-5 ">
         <div className="p-5 sm:p-5 md:p-5 lg:p-0 xl:p-0">
-          {user?.imageUrl? (
+          {user?.imageUrl ? (
             <div
               className=" w-[150px] sm:w-[160px] md:w-[150px] lg:w-[200px] h-[150px] sm:h-[160px] md:h-[150px] lg:h-[200px]  overflow-hidden rounded-full cursor-pointer"
               onClick={open}
@@ -179,7 +168,8 @@ const Detail = () => {
             <DetailCard user={user} />
             <div className="">
               <h3 className="text-lg text-gray-800 dark:text-white/90  font-body flex items-center gap-1">
-                History <AiOutlineQuestionCircle className="text-gray-500 dark:text-white/70" />
+                History{" "}
+                <AiOutlineQuestionCircle className="text-gray-500 dark:text-white/70" />
               </h3>
               <p className=" dark:text-white/80 font-serif">
                 Last edited :{" "}

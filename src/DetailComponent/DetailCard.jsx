@@ -5,7 +5,6 @@ import { BsFlag, BsTelephone, BsPersonWorkspace } from "react-icons/bs";
 import { Link } from "react-router-dom";
 const DetailCard = ({ user }) => {
   const userPhoneNumber = user?.phoneNumber;
-  // const date = new Date().toDateString();
   return (
     <div className="flex flex-col gap-5 min-w-[380px] sm:min-w-[400px] md:min-w-[430px] lg:min-w-[450px] xl:min-w-[450px] p-3 border rounded-md shadow-md shadow-gray-100 dark:shadow-none dark:border-gray-500">
       <h3 className="text-gray-800 font-semibold font-body dark:text-white/90">Contact details</h3>
@@ -35,18 +34,18 @@ const DetailCard = ({ user }) => {
             {user?.address}
           </a>
         </p>
-        <p className="flex items-center">
+        <span className="flex items-center">
           <BsPersonWorkspace className="text-gray-600 dark:text-white/70 mr-5 mb-0" />
           <p className="text-gray-700  dark:text-white/80 font-serif">{user?.job}</p>
-        </p>
-        <p className="flex items-center">
+        </span>
+        <span className="flex items-center">
           <BiCake className="text-gray-600 dark:text-white/70 mr-5 mb-0" />
           <p className="text-gray-700  dark:text-white/80 font-serif">{user?.date}</p>
-        </p>
-        <p className="flex items-center">
+        </span>
+        <span className="flex items-center">
           <BiNote className="text-gray-600 dark:text-white/70 mr-5 mb-0" />
           <p className="text-gray-700 dark:text-white/80 font-serif">{user?.note}</p>
-        </p>
+        </span>
       </div>
     </div>
   );

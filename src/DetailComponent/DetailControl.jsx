@@ -13,14 +13,12 @@ const DetailEdit = ({ edit, setEdit, user }) => {
   const updateDocRef = doc(db, userDocName, UserId.id);
   const navigate = useNavigate();
   const True = async (e) => {
-    console.log(user);
     try {
       await updateDoc(updateDocRef, { fav: true });
     } catch (e) {
       console.log(e);
     }
   };
-
   const False = async (e) => {
     try {
       await updateDoc(updateDocRef, { fav: false });
@@ -37,7 +35,6 @@ const DetailEdit = ({ edit, setEdit, user }) => {
       console.log(e);
     }
   };
-  console.log(user);
   return (
     <>
       <div className="flex mt-[15px] justify-end gap-5 items-center mr-5 sm:mr-5 md:mr-0 lg:mr-0">
@@ -53,9 +50,9 @@ const DetailEdit = ({ edit, setEdit, user }) => {
         >
           <div className="">
             {user?.fav ? (
-              <BsStarFill onClick={False} className=" text-lg cursor-pointer" />
+              <BsStarFill onClick={False} className="dark:text-white text-lg cursor-pointer" />
             ) : (
-              <BsStar onClick={True} className=" text-lg cursor-pointer" />
+              <BsStar onClick={True} className="dark:text-white text-lg cursor-pointer" />
             )}
           </div>
         </Tooltip>

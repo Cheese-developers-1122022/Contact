@@ -3,7 +3,7 @@ import { DateInput } from "@mantine/dates";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
-import "./DetailEdit.css"
+import "./DetailEdit.css";
 import {
   BsCalendar,
   BsFlag,
@@ -17,16 +17,10 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 const Edit = ({ edit, setEdit, user }) => {
   const storage = JSON?.parse(Cookies?.get("Info"));
-  console.log(user?.id);
-  console.log(storage);
   const userDocName = storage?.email;
   const UserId = useParams();
-  console.log(UserId.id);
   const updateDocRef = doc(db, userDocName, UserId.id);
-
-  console.log(user);
   const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
   const [telephone, setTelephone] = useState(null);
@@ -39,7 +33,6 @@ const Edit = ({ edit, setEdit, user }) => {
   useEffect(() => {
     setFirstName(user?.name);
     setEmail(user?.email);
-    // setBirthday(user?.date);
     setJob(user?.job);
     setTelephone(user?.phoneNumber);
     setNote(user?.note);
@@ -63,7 +56,6 @@ const Edit = ({ edit, setEdit, user }) => {
       console.error(e);
     }
   };
-  console.log(user.date);
   return (
     <div className="">
       <form className="flex flex-col gap-4 w-[70%] border dark:border-gray-500 rounded-md p-3">
@@ -77,15 +69,6 @@ const Edit = ({ edit, setEdit, user }) => {
             onChange={(e) => setFirstName(e.target.value)}
             className="w-full"
           />
-          {/* <TextInput
-            placeholder="Last Name"
-            label="Last Name"
-            type="text"
-            icon={<BsPerson />}
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className="w-full"
-          /> */}
           <TextInput
             placeholder="your@gmail.com"
             icon={<AiOutlineMail />}

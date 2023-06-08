@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall } from "react-icons/bi";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, useMantineTheme } from "@mantine/core";
 import Form from "../DetailComponent/EmailForm";
@@ -13,7 +13,7 @@ const Recently = () => {
   const [filterFavorite, setFilterFavorite] = useState([]);
   const favorite = useSelector((state) => state.light.users);
   const theme = useMantineTheme();
-
+  const navigate = useNavigate();
   useEffect(() => {
     setFavoriteItem(favorite);
   }, [favorite]);
@@ -32,7 +32,10 @@ const Recently = () => {
   const userEmailAndCall = (e) => {
     e.stopPropagation();
   };
-  console.log(filterFavorite);
+  const firstComponent = (e) => {
+    e.stopPropagation();
+    navigate(`/details/${item?.id}`);
+  };
   return (
     <div className="flex items-center relative px-3">
       <div className=" min-w-full w-[90vw] justify-start sm:w-[90vw] md:w-[90vw] lg:w-[70vw] xl:w-[85vw] overflow-x-scroll scroll-custom flex items-center gap-5 scroll-smooth py-4">
@@ -43,7 +46,7 @@ const Recently = () => {
               className="flex min-w-[350px] sm:min-w-[360px] md:min-w-[370px] lg:min-w-[380px] xl:min-w-[380px] flex-col p-5 rounded-lg shadow-lg shadow-blue-100 dark:shadow-none dark:bg-gray-700 gap-3 justify-center user-card"
               onClick={userEmailAndCall}
             >
-              <Link to={`/details/${item?.id}`}>
+              <div onClick={firstComponent}>
                 <div className="flex justify-between items-center pb-4 border-b">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -62,29 +65,31 @@ const Recently = () => {
                       )}
                     </div>
                     <div className="">
-                      <h3 className="font-semibold dark:text-white font-body">{item?.name}</h3>
-                      <a
+                      <h3 className="font-semibold dark:text-white font-body">
+                        {item?.name}
+                      </h3>
+                      <Link
                         href={`tel:${item?.phoneNumber}`}
                         onClick={call}
                         className="text-gray-500 dark:text-white/80 cursor-pointer font-mono text-sm"
                       >
                         {item?.phoneNumber}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="p-2 rounded-full bg-gray-100">
                     <BsStarFill className="text-gray-400 text-sm" />
                   </div>
                 </div>
-              </Link>
+              </div>
               <div className="p-2">
-                <a
+                <Link
                   href={`https://www.google.com/maps/place/${item?.address}`}
                   onClick={place}
                   className="text-gray-600 dark:text-white/80 font-[500] font-mono mb-1"
                 >
                   {item?.address}
-                </a>
+                </Link>
                 <p className=" text-gray-600 dark:text-white/80 font-[500] font-mono text-sm">
                   {item?.email}
                 </p>
@@ -119,17 +124,15 @@ const Recently = () => {
                   }}
                   centered
                 >
-                  {/* form mhr close method passing payy ml */}
                   <Form close={close} data={item} />
                 </Modal>
-                <a
-                  // tel need
+                <Link
                   onClick={call}
                   href={`tel:${item?.phoneNumber}`}
                   className="flex items-center gap-2 px-4 py-1 text-gray-400 dark:text-white/70 font-serif text-call text-sm"
                 >
                   <BiPhoneCall /> Call
-                </a>
+                </Link>
               </div>
             </div>
           );

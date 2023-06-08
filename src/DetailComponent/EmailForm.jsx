@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useEffect } from "react";
 const Form = ({ close, data }) => {
-  console.log(data, "min ga lar prr");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const form = useRef();
@@ -17,8 +16,6 @@ const Form = ({ close, data }) => {
     setName(data.name);
   }, [name, email]);
   const sendEmail = async (e) => {
-    console.log(e);
-
     if (e === undefined) {
       const Toast = Swal.mixin({
         toast: true,
@@ -47,7 +44,6 @@ const Form = ({ close, data }) => {
           form.current,
           "Ebu4oArSdzC-7RLH3"
         );
-        console.log(result.text);
         if (result.text === "OK") {
           const Toast = Swal.mixin({
             toast: true,

@@ -4,8 +4,8 @@ import { db } from "../../DataConfig/firestore";
 import Cookies from "js-cookie";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
-import { GrClose, GrMail } from "react-icons/gr";
-import { BiImageAdd, BiPencil, BiMap } from "react-icons/bi";
+import { GrMail } from "react-icons/gr";
+import { BiImageAdd, BiMap } from "react-icons/bi";
 import {
   BsTrash,
   BsFillPersonFill,
@@ -15,14 +15,11 @@ import {
 } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
 import { CgNotes } from "react-icons/cg";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-// import "react-phone-number-input/style.css";
-// import "./CreateContact.css";
+import { Link, useNavigate } from "react-router-dom";
 import { TextInput } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
-import { Loader } from "@mantine/core";
 import { RxCross2 } from "react-icons/rx";
-import "./ContactCreate.css"
+import "./ContactCreate.css";
 
 import moment from "moment";
 const ContactCreate = () => {
@@ -44,7 +41,6 @@ const ContactCreate = () => {
   const userData = JSON.parse(Cookies.get("Info"));
   const userEmail = userData.email;
   const navigate = useNavigate();
-  console.log(userEmail);
 
   const handleEdit = () => {
     closeEditModal();
@@ -56,7 +52,6 @@ const ContactCreate = () => {
     setImage(null);
     closeEditModal();
   };
-  console.log(imageUrl);
   const contactData = collection(db, userEmail);
   const addContact = async (e) => {
     setLoad(false);
@@ -81,8 +76,6 @@ const ContactCreate = () => {
       setLoad(true);
     }
   };
-  console.log(date);
-  console.log(imageUrl);
   return (
     <div className="relative w-screen flex  flex-col p-5 md:items-center ">
       <div className="  flex justify-between items-end  md:self-start p-3">
@@ -167,16 +160,7 @@ const ContactCreate = () => {
                   className={`${
                     imageUrl ? "block" : "hidden"
                   } absolute float-right bottom-2 right-2 `}
-                >
-                  {/* {imageUrl && (
-                    <button
-                      className="w-8 h-8 border flex items-center justify-center bg-white rounded-[3rem]"
-                      onClick={openEditModal}
-                    >
-                      <BiPencil className="text-blue-600" />
-                    </button>
-                  )} */}
-                </div>
+                ></div>
                 <div className={`${imageUrl ? { close } : ""}`}>
                   <Modal
                     opened={openedEditModal}

@@ -10,7 +10,6 @@ const Login = () => {
   const Name = nameRef?.current?.value;
   const Email = emailRef?.current?.value;
   const phoneNumber = phoneNumberRef?.current?.value;
-  const address = AddressRef?.curre?.value;
   const formHandler = async (e) => {
     e.preventDefault();
 
@@ -25,10 +24,6 @@ const Login = () => {
       console.error(e);
     }
   };
-  console.log(Name);
-  console.log(Email);
-  console.log(phoneNumber);
-  console.log(address);
   return (
     <div className=" ">
       <form onSubmit={formHandler}>

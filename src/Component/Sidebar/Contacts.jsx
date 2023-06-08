@@ -12,12 +12,9 @@ const Contacts = () => {
   const [user, setUser] = useState([]);
   const [fav, setFav] = useState([]);
   const userToken = Cookies?.get("User");
-  console.log(userToken);
   const userInfo = JSON.parse(Cookies.get("Info"));
   const userEmail = userInfo?.email;
   const UserCollectionRef = collection(db, userEmail);
-  console.log(UserCollectionRef);
-  console.log(userEmail);
   const dispatch = useDispatch();
 
   const text = useSelector((state) => state.light.users);
@@ -46,15 +43,12 @@ const Contacts = () => {
     setUser(filter);
   }, [fav]);
 
-  console.log(user);
   const data = useSelector((state) => state.light.users);
 
   const filterFav = data?.filter((item) => item.fav === true);
   useEffect(() => {
     setUser(filterFav);
   }, [data]);
-
-  console.log(user);
 
   if (data?.length === 0) {
     return (

@@ -6,7 +6,7 @@ const ContactsPage = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start">
+      <div className="flex h-screen justify-center sm:justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start">
         <Siderbar />
         <Contracts />
       </div>

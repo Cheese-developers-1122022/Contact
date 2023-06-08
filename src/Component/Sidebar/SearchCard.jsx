@@ -16,7 +16,7 @@ const SearchCard = (props) => {
         >
           <div className="flex justify-between items-center pb-4">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16  rounded-[5rem] overflow-hidden">
+              <div className="w-16 h-16   overflow-hidden">
                 {imageUrl ? (
                   <div className="w-16 h-16 border-2 border-[#D8D8D8] hover:border-blue-500 rounded-[5rem] overflow-hidden">
                     <img
@@ -26,7 +26,7 @@ const SearchCard = (props) => {
                     />
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center bg-gray-300 rounded-full w-10 h-10 border-2 border-[#acacac] hover:border-blue-500">
+                  <div className="flex items-center justify-center bg-gray-300 rounded-[50%] w-10 h-10 border-2 border-[#acacac] hover:border-blue-500">
                     <h2 className=" uppercase text-2xl font-semibold  text-black">
                       {name?.charAt(0)}
                     </h2>

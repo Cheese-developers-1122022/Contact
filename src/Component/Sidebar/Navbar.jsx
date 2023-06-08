@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { UseCustomProvider } from "../../Context/DarkMoodContext";
 import { BsFillSunFill, BsFillMoonStarsFill, BsPerson } from "react-icons/bs";
-// import { RiContactsFill } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiSearchAlt2 } from "react-icons/bi";
 import "./navbar.css";
@@ -20,7 +19,6 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(search);
     nav("/search", { state: { search } });
     setSearch("");
   };
@@ -37,7 +35,6 @@ const Navbar = () => {
 
   const logoutHandler = async () => {
     const { data } = await logout(token);
-    console.log(data);
     try {
       if (data.success) {
         nav("/login");
@@ -64,7 +61,6 @@ const Navbar = () => {
           </button>
           <Link to={"/"}>
             <div className=" ">
-              {/* <RiContactsFill className=" text-3xl " /> */}
               <h1 className="hidden md:block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
                 ConnectX
               </h1>
@@ -90,9 +86,6 @@ const Navbar = () => {
             </form>
           </div>
         </div>
-        {/* <div className="">
-          <GoSearch className=" dark:text-white/70" />
-        </div> */}
         <div className=" flex md:gap-3 mr-5">
           <button
             className=" flex items-center justify-center w-10 h-10  rounded-[5rem] nav-toggle"
@@ -126,13 +119,13 @@ const Navbar = () => {
                       </h3>
                     </Menu.Label>
                     <Menu.Item>
-                      <button
+                      <div
                         onClick={logoutHandler}
                         className="text-sm flex text-red-500 font-medium font-serif items-center gap-1"
                       >
                         <IoLogOutOutline className="text-black dark:text-white" />{" "}
                         Logout
-                      </button>
+                      </div>
                     </Menu.Item>
                   </Menu.Dropdown>
                 </Menu>

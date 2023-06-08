@@ -67,7 +67,6 @@ const TableData = (props) => {
       console.log(e);
     }
   };
-  console.log(id);
   const detailLink = (e) => {
     e.stopPropagation();
     return nav(`/details/${id}`, { state: { data: props } });
@@ -98,11 +97,16 @@ const TableData = (props) => {
       <td className="px-3 py-4 font-semibold flex justify-center sm:justify-start md:justify-start lg:justify-start xl:justify-start 2xl:justify-start items-center tracking-wide text-gray-900">
         <div className="">
           <h3 className=" font-body dark:text-white/90">{name}</h3>
-          <p className="text-gray-500 font-mono dark:text-white/80 cursor-pointer text-sm">{phoneNumber}</p>
+          <p className="text-gray-500 font-mono dark:text-white/80 cursor-pointer text-sm">
+            {phoneNumber}
+          </p>
         </div>
       </td>
       <td className="px-3 py-4 hidden sm:hidden md:hidden lg:table-cell xl:table-cell 2xl:table-cell font-semibold text-left tracking-wide text-gray-900">
-        <a href="" className="hover:border-b-[1px] font-mono dark:text-white/80 border-gray-200">
+        <a
+          href=""
+          className="hover:border-b-[1px] font-mono dark:text-white/80 border-gray-200"
+        >
           {email}
         </a>
       </td>
@@ -143,7 +147,10 @@ const TableData = (props) => {
                     className=" text-lg cursor-pointer dark:text-white/90"
                   />
                 ) : (
-                  <BsStar onClick={True} className=" text-lg cursor-pointer dark:text-white/70" />
+                  <BsStar
+                    onClick={True}
+                    className=" text-lg cursor-pointer dark:text-white/70"
+                  />
                 )}
               </div>
             </Tooltip>
@@ -181,6 +188,7 @@ const TableData = (props) => {
                 </Menu.Target>
                 <Menu.Dropdown size="xs">
                   <Menu.Item
+                    onClick={del}
                     size="xs"
                     color="red"
                     icon={<AiOutlineDelete size={14} />}

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const Siderbar = () => {
   const side = useSelector((state) => state.light.light);
   const count = useSelector((state) => state.light.users);
-  console.log(count);
   return (
     <div className="bg-[#f7f6f6] dark:bg-gray-600 ">
       <div
@@ -16,10 +15,9 @@ const Siderbar = () => {
             : "translate-x-[-300px] ease-in  duration-[0.15s]  w-0  z-[1000] md:z-[1] lg:relative absolute"
         }
       >
-        <div className=" min-h-screen items-center flex gap-y-4 flex-col bg-[#f7f6f6] dark:bg-gray-600">
+        <div className=" min-h-screen lg:h-[830px] items-center flex gap-y-4 flex-col bg-[#f7f6f6] dark:bg-gray-600">
           <Link to={"/"}>
             <div className=" py-2">
-              {/* <RiContactsFill className=" text-3xl " /> */}
               <h1 className="md:hidden block  text-lg sm:text-xl md:text-2xl font-semibold font-body dark:text-white">
                 ConnectX
               </h1>

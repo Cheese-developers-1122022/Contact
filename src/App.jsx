@@ -8,10 +8,11 @@ import ContactsPage from "./Path/ContactsPage";
 import ContractsCreatePage from "./Path/ContractsCreatePage";
 import DetailPage from "./Path/DetailPage";
 import SearchPage from "./Path/SearchPage";
+import ErrorPage from "./ErrorPage";
 
 const App = () => {
   return (
-    <div className=" dark:bg-gray-900 ">
+    <div className=" dark:bg-gray-900 overflow-x-hidden over-flow-scroll">
       <Routes>
         <Route
           path="/"
@@ -40,6 +41,7 @@ const App = () => {
           }
         />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
