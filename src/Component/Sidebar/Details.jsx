@@ -16,7 +16,7 @@ import Cookies from "js-cookie";
 import DetailEdit from "../../DetailComponent/DetailControl";
 const Detail = () => {
   const [user, setUser] = useState([]);
-  const [newImage, setNewImage] = useState([]);
+  // const [newImage, setNewImage] = useState([]);
   const [opened, { open, close }] = useDisclosure(false);
   const [edit, setEdit] = useState(false);
   const dateTime = new Date().toLocaleString("en-GB", {
@@ -139,13 +139,13 @@ const Detail = () => {
             <div className="text-center mt-5">
               <h3 className="text-lg font-semibold font-body">{user?.name}</h3>
               <p className=" font-mono">{user?.email}</p>
-              <div className="flex justify-center mt-5">
+              {/* <div className="flex justify-center mt-5">
                 <TextInput
                   value={newImage}
                   onChange={(e) => setNewImage(e.target.value)}
                   placeholder="Upload New Image"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </Modal>

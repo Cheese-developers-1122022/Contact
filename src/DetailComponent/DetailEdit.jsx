@@ -59,7 +59,7 @@ const Edit = ({ edit, setEdit, user }) => {
   };
   return (
     <div className="">
-      <form className="flex flex-col gap-4 w-[70%] border dark:border-gray-500 rounded-md p-3">
+      <form className="flex flex-col gap-4 lg:w-[70%] lg:ml-0 ml-3  w-[90%] border dark:border-gray-500 rounded-md p-3">
         <div className="flex justify-between gap-5">
           <TextInput
             placeholder={"Name"}
