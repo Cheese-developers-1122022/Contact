@@ -9,8 +9,6 @@ import { useRegisterMutation } from "../../app/Authapi";
 import LoginLago from "./LoginLago";
 
 const Register = () => {
-  const notify = () => toast("Here is your toast.");
-
   const [register, { isError, isLoading, isSuccess, isUninitialized }] =
     useRegisterMutation();
   const nav = useNavigate();
@@ -43,12 +41,12 @@ const Register = () => {
                 onSubmit={form.onSubmit(async (values) => {
                   try {
                     const { data } = await register(values);
-                    notify();
                     if (data?.success) {
                       nav("/login");
                     }
                   } catch (error) {
                     console.log(error);
+                    alert(e);
                   }
                 })}
                 className=" w-[100%] xl:w-[40%] lg:w-[40%]  p-2 flex flex-col gap-5  md:gap-7"

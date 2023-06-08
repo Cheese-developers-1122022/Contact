@@ -41,6 +41,7 @@ const Login = () => {
                   }
                 } catch (error) {
                   console.log(error);
+                  alert(e);
                 }
               })}
               className=" flex flex-col sm:gap-10 md:gap-8 lg:gap-8 xl:gap-10 w-[100%] sm:w-[45%] sm:p-5 md:p-5 lg:p-5 xl:p-5 p-0 gap-7"

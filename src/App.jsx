@@ -9,6 +9,7 @@ import ContractsCreatePage from "./Path/ContractsCreatePage";
 import DetailPage from "./Path/DetailPage";
 import SearchPage from "./Path/SearchPage";
 import ErrorPage from "./ErrorPage";
+import FormRouteGuard from "./FormRouteGuard";
 
 const App = () => {
   return (
@@ -22,8 +23,22 @@ const App = () => {
             </RouteGuard>
           }
         />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/register"
+          element={
+            <FormRouteGuard>
+              <Register />
+            </FormRouteGuard>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <FormRouteGuard>
+              <Login />
+            </FormRouteGuard>
+          }
+        />
         <Route
           path="/create"
           element={

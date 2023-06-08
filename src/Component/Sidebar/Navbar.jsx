@@ -72,7 +72,7 @@ const Navbar = () => {
             <form action="" onSubmit={onSubmitHandler}>
               <input
                 type="text"
-                className=" border dark:border-none  rounded-md dark:bg-gray-700 px-6 py-1 outline-none w-[200px] sm:w-[250px] md:w-[400px] "
+                className=" border dark:border-none  rounded-md dark:text-white dark:bg-gray-700 px-6 py-1 outline-none w-[200px] sm:w-[250px] md:w-[400px] "
                 placeholder="Search..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

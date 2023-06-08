@@ -218,6 +218,7 @@ const ContactCreate = () => {
             <div className="mt-3">
               <TextInput
                 type="text"
+                required
                 label="Email"
                 icon={<GrMail />}
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -232,6 +233,7 @@ const ContactCreate = () => {
                 type="text"
                 label="Address"
                 icon={<BiMap />}
+                required
                 className="   w-[300px] md:w-[500px] lg:w-[550px]"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}

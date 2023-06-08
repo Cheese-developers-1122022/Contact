@@ -62,7 +62,11 @@ const TableData = (props) => {
   const del = async (e) => {
     e.stopPropagation();
     try {
-      await deleteDoc(updateDocRef);
+      if (confirm("Are you sure you want to delete?")) {
+        await deleteDoc(updateDocRef);
+      } else {
+        return null;
+      }
     } catch (e) {
       console.log(e);
     }
